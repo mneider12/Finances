@@ -1,12 +1,12 @@
 CashTransaction
 
-<b>Purpose</b>: 
+**Purpose**: 
 Tracks deposits and withdrawals
 
-<b>Data elements</b>:
+**Data elements**:
 unique identifier
 date
 amount
 
-<b>high level design</b>:
+**high level design**:
 tracks id counter and increments it when a new CashTransaction is created
