@@ -11,12 +11,6 @@ namespace FinancesTest.model
     [TestClass]
     public class RecordFactoryTest
     {
-        //public RecordFactoryTest()
-        //{
-        //    //
-        //    // TODO: Add constructor logic here
-        //    //
-        //}
 
         private TestContext testContextInstance;
 
