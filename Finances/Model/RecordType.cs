@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Finances.Model
 {
-    public enum RecordTypes
+    public enum RecordType
     {
         CashTransaction
     }

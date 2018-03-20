@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Finances.Model
 {
-    public abstract class RecordFactory
+    public abstract class IRecordFactory
     {
     }
 }

@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Finances.Model.RecordIdManager
+{
+    public class MockRecordIdManager : IRecordIdManager
+    {
+        private Dictionary<RecordType, int> nextRecordIds;
+
+        public override int getNextId(RecordType type)
+        {
+            int nextId = nextRecordIds[type];
+            nextRecordIds[type]++;
+            return nextId;
+         }
+
+        /// <summary>
+        /// Initialize all types to 1 in nextRecordIds
+        /// </summary>
+        /// <returns>always true</returns>
+        public override bool load()
+        {
+            nextRecordIds = new Dictionary<RecordType, int>();
+            foreach (RecordType type in Enum.GetValues(typeof(RecordType)))
+            {
+                nextRecordIds.Add(type, 1);
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Do nothing, this mock version is non-persistent
+        /// </summary>
+        /// <returns>always true</returns>
+        public override bool save()
+        {
+            return true;
+        }
+    }
+}
