@@ -9,7 +9,7 @@ namespace Finances.Model.RecordIdManager
     {
         private Dictionary<RecordType, int> nextRecordIds;
 
-        public override int getNextId(RecordType type)
+        public int getNextId(RecordType type)
         {
             int nextId = nextRecordIds[type];
             nextRecordIds[type]++;
@@ -20,7 +20,7 @@ namespace Finances.Model.RecordIdManager
         /// Initialize all types to 1 in nextRecordIds
         /// </summary>
         /// <returns>always true</returns>
-        public override bool load()
+        public bool load()
         {
             nextRecordIds = new Dictionary<RecordType, int>();
             foreach (RecordType type in Enum.GetValues(typeof(RecordType)))
@@ -34,7 +34,7 @@ namespace Finances.Model.RecordIdManager
         /// Do nothing, this mock version is non-persistent
         /// </summary>
         /// <returns>always true</returns>
-        public override bool save()
+        public bool save()
         {
             return true;
         }
