@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Finances.Model.RecordIdManager
+﻿namespace Finances.Model.Shared.RecordIdManager
 {
     public interface IRecordIdManager
     {

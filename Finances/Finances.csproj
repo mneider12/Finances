@@ -82,10 +82,9 @@
     <Compile Include="Model\CashTransaction\CashTransactionFactory.cs" />
     <Compile Include="Model\CashTransaction\ICashTransaction.cs" />
     <Compile Include="Model\CashTransaction\ICashTransactionFactory.cs" />
-    <Compile Include="Model\RecordIdManager\IRecordIdManager.cs" />
-    <Compile Include="Model\RecordIdManager\MockRecordIdManager.cs" />
-    <Compile Include="Model\RecordType.cs" />
-    <Compile Include="Model\RecordFactory.cs" />
+    <Compile Include="Model\Shared\RecordIdManager\IRecordIdManager.cs" />
+    <Compile Include="Model\Shared\RecordIdManager\MockRecordIdManager.cs" />
+    <Compile Include="Model\Shared\RecordType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

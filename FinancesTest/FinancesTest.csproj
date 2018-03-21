@@ -53,9 +53,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Model\CashTransaction\CashTransactionTest.cs" />
-    <Compile Include="Model\RecordFactoryTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Model\CashTransaction\MockCashTransactionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Finances\Finances.csproj">
+      <Project>{50D01AD7-29C8-4416-8D3A-C01ECADD8CE5}</Project>
+      <Name>Finances</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
