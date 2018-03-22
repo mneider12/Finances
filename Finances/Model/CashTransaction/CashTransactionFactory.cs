@@ -1,4 +1,4 @@
-﻿using Finances.Model.Shared.RecordIdManager;
+﻿using Finances.Model.Shared;
 using System;
 
 namespace Finances.Model.CashTransaction

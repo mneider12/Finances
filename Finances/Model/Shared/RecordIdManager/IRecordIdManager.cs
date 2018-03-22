@@ -1,9 +1,7 @@
-﻿namespace Finances.Model.Shared.RecordIdManager
+﻿namespace Finances.Model.Shared
 {
     public interface IRecordIdManager
     {
         int getNextId(RecordType type);
-        bool load();
-        bool save();
     }
 }

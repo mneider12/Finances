@@ -1,5 +1,5 @@
 ﻿using Finances.Model.CashTransaction;
-using Finances.Model.Shared.RecordIdManager;
+using Finances.Model.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,7 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Finances.Model.Shared.RecordIdManager;
+using Finances.Model.Shared;
 using Finances.Model.CashTransaction;
 
 namespace FinancesTest.Model.CashTransaction
@@ -13,13 +13,21 @@ namespace FinancesTest.Model.CashTransaction
     [TestClass]
     public class CashTransactionTest
     {
-        public CashTransactionTest()
+        #region test cases
+        [TestMethod]
+        public void createTest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
+            ICashTransactionFactory cashTransactionFactory = new MockCashTransactionFactory();
 
+            DateTime jan012000 = new DateTime(2000,1,1);
+            Decimal amount = 100.55m;
+            ICashTransaction cashTransaction = cashTransactionFactory.create(jan012000, amount);
+
+            Assert.AreEqual(1, cashTransaction.Id);
+            Assert.AreEqual(amount, cashTransaction.Amount);
+            Assert.AreEqual(jan012000, cashTransaction.Date);
+        }
+        #endregion
         private TestContext testContextInstance;
 
         /// <summary>
@@ -36,40 +44,6 @@ namespace FinancesTest.Model.CashTransaction
             {
                 testContextInstance = value;
             }
-        }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
-        public static void createFactories(TestContext testContext)
-        {
-            IRecordIdManager recordIdManager = new MockRecordIdManager();
-            ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(recordIdManager);
-        }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
-        [TestMethod]
-        public void TestMethod1()
-        {
-            //
-            // TODO: Add test logic here
-            //
-        }
+        }    
     }
 }
