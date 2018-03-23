@@ -19,7 +19,8 @@ namespace FinancesTest.Model
         [TestMethod]
         public void createTest()
         {
-            ICashTransactionFactory cashTransactionFactory = new MockCashTransactionFactory();
+            IRecordIdManager recordIdManager = new MockRecordIdManager();
+            ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(recordIdManager);
 
             DateTime jan012000 = new DateTime(2000,1,1);
             Decimal amount = 100.55m;

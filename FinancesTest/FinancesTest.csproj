@@ -52,8 +52,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="IO\DatabaseManagerTest.cs" />
+    <Compile Include="IO\MockDatabaseManagerFactory.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionTest.cs" />
-    <Compile Include="Model\CashTransaction\MockCashTransactionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +63,7 @@
       <Name>Finances</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
