@@ -82,7 +82,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\Database\DatabaseManager.cs" />
     <Compile Include="IO\Database\IDatabaseManager.cs" />
+    <Compile Include="IO\FileSystem\IFileSystemManager.cs" />
     <Compile Include="Model\CashTransaction\CashTransaction.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionFactory.cs" />
     <Compile Include="Model\CashTransaction\ICashTransaction.cs" />
