@@ -1,4 +1,5 @@
-﻿using Finances.Model.Shared;
+﻿using Finances.IO;
+using Finances.Model.Shared;
 using System;
 
 namespace Finances.Model.CashTransaction
@@ -27,6 +28,12 @@ namespace Finances.Model.CashTransaction
             {
                 return amount;
             }
+        }
+        #endregion
+        #region IRecord members
+        public bool save(IDatabaseManager databaseManager)
+        {
+            return true;
         }
         #endregion
 

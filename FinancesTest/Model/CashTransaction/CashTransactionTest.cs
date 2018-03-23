@@ -14,6 +14,11 @@ namespace FinancesTest.Model.CashTransaction
     public class CashTransactionTest
     {
         #region test cases
+        /// <summary>
+        /// Test creating a cash transaction
+        /// Here, the date is 1/1/2000 and the amount is 100.55. 
+        /// ID will be 1 supplied by the mock factory
+        /// </summary>
         [TestMethod]
         public void createTest()
         {
