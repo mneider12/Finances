@@ -1,7 +1,7 @@
-﻿using Finances.Model.Shared;
+﻿using Finances.Model;
 using System;
 
-namespace Finances.Model.CashTransaction
+namespace Finances.Model
 {
     public class CashTransactionFactory : ICashTransactionFactory
     {

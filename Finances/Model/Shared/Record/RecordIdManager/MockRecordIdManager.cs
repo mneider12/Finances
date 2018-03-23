@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Finances.Model.Shared
+namespace Finances.Model
 {
     public class MockRecordIdManager : IRecordIdManager
     {

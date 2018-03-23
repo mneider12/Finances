@@ -1,8 +1,7 @@
 ﻿using Finances.IO;
-using Finances.Model.Shared;
 using System;
 
-namespace Finances.Model.CashTransaction
+namespace Finances.Model
 {
     public class CashTransaction : ICashTransaction
     {
@@ -40,7 +39,7 @@ namespace Finances.Model.CashTransaction
         #region constructors
         public CashTransaction(IRecordIdManager recordManager, DateTime date, decimal amount)
         {
-            this.id = recordManager.getNextId(Shared.RecordType.CashTransaction);
+            this.id = recordManager.getNextId(RecordType.CashTransaction);
             this.date = date;
             this.amount = amount;
         }

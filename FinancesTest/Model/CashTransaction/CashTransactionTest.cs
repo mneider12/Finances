@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Finances.Model.Shared;
-using Finances.Model.CashTransaction;
+using Finances.Model;
 
-namespace FinancesTest.Model.CashTransaction
+namespace FinancesTest.Model
 {
     /// <summary>
     /// Summary description for UnitTest1

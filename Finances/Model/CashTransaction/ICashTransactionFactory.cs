@@ -1,7 +1,6 @@
-﻿using Finances.Model.Shared;
-using System;
+﻿using System;
 
-namespace Finances.Model.CashTransaction
+namespace Finances.Model
 {
     public interface ICashTransactionFactory
     {

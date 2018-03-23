@@ -1,7 +1,6 @@
-﻿using Finances.Model.Shared.Record;
-using System;
+﻿using System;
 
-namespace Finances.Model.CashTransaction
+namespace Finances.Model
 {
     public interface ICashTransaction : IRecord
     {

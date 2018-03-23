@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Finances.Model.Shared.Record
+namespace Finances.Model
 {
     public interface IRecord
     {

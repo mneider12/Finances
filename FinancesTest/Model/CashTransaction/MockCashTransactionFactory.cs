@@ -1,18 +1,13 @@
-﻿using Finances.Model.CashTransaction;
-using Finances.Model.Shared;
+﻿using Finances.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FinancesTest.Model.CashTransaction
+namespace FinancesTest.Model
 {
     class MockCashTransactionFactory : ICashTransactionFactory
     {
         public ICashTransaction create(DateTime date, decimal amount)
         {
-            return new Finances.Model.CashTransaction.CashTransaction(recordIdManager, date, amount);
+            return new CashTransaction(recordIdManager, date, amount);
         }
 
         public MockCashTransactionFactory()

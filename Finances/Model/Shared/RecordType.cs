@@ -1,4 +1,4 @@
-﻿namespace Finances.Model.Shared
+﻿namespace Finances.Model
 {
     public enum RecordType
     {
