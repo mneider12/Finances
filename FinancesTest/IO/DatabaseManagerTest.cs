@@ -11,30 +11,53 @@ namespace FinancesTest.IO
         [TestMethod]
         public void insertTest()
         {
-
+            string tableName = "cash_transaction";
+            string id = "1";
+            string date;
         }
+
         #region getInsertSqlTest
         [TestMethod]
         public void getInsertSqlTest()
         {
+            getInsertSqlTableNameExceptionTest();
+            getInsertSqlEmptyValuesExceptionTest();
+
             Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1')", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "1"));
             Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B')", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "A", "B"));
+        }
+        
+        private void getInsertSqlTableNameExceptionTest()
+        {
+            try
+            {
+                string tableName = null;
+                databaseManagerPrivate.Invoke("getInsertSql", tableName);
+            }
+            catch (InvalidSqlException e)
+            {
+                Assert.AreEqual("table name is required for insert command", e.Message);
+                return;
+            }
+
+            Assert.Fail();  //expected to hit the exception
         }   
     
-        [TestMethod]
-        [ExpectedException(typeof(invalidSqlException))]
-        public void getInsertSqlTableNameExceptionTest()
-        {
-            string tableName = null;
-            databaseManagerPrivate.Invoke("getInsertSql", tableName);
-        }
 
-        [TestMethod]
-        [ExpectedException(typeof(invalidSqlException))]
-        public void getInsertSqlEmptyValuesExceptionTest()
+        private void getInsertSqlEmptyValuesExceptionTest()
         {
-            string tableName = "TEST_TABLE";
-            databaseManagerPrivate.Invoke("getInsertSql", tableName);
+            try
+            { 
+                string tableName = "TEST_TABLE";
+                databaseManagerPrivate.Invoke("getInsertSql", tableName);
+            }
+            catch (InvalidSqlException e)
+            {
+                Assert.AreEqual("values required for insert command", e.Message);
+                return;
+            }
+
+            Assert.Fail();
         }
         #endregion
 

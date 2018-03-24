@@ -29,7 +29,7 @@ namespace Finances.IO
             string message;
             if (!validateInsertParameters(out message, tableName, values))
             {
-                throw new invalidSqlException(message);
+                throw new InvalidSqlException(message);
             }
 
             string insertSql = "INSERT INTO " + tableName +

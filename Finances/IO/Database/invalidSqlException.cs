@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Finances.IO
 {
-    public class invalidSqlException : Exception
+    public class InvalidSqlException : Exception
     {
-        public invalidSqlException() : base() { }
-        public invalidSqlException(string message) : base(message) { }
-        public invalidSqlException(string message, Exception inner) : base(message, inner) { }
+        public InvalidSqlException() : base() { }
+        public InvalidSqlException(string message) : base(message) { }
+        public InvalidSqlException(string message, Exception inner) : base(message, inner) { }
     }
 }
