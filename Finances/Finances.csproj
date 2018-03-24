@@ -87,15 +87,19 @@
     <Compile Include="IO\Database\IDatabaseManager.cs" />
     <Compile Include="IO\Database\IDatabaseManagerFactory.cs" />
     <Compile Include="IO\FileSystem\FileSystemManager.cs" />
+    <Compile Include="IO\FileSystem\FileSystemManagerFactory.cs" />
     <Compile Include="IO\FileSystem\IFileSystemManager.cs" />
+    <Compile Include="IO\FileSystem\IFileSystemManagerFactory.cs" />
     <Compile Include="Model\CashTransaction\CashTransaction.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionFactory.cs" />
     <Compile Include="Model\CashTransaction\ICashTransaction.cs" />
     <Compile Include="Model\CashTransaction\ICashTransactionFactory.cs" />
     <Compile Include="Model\Shared\Record\IRecord.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdManager.cs" />
+    <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdManagerFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\MockRecordIdManager.cs" />
     <Compile Include="Model\Shared\RecordType.cs" />
+    <Compile Include="Model\Shared\Record\RecordIdManager\MockRecordIdManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

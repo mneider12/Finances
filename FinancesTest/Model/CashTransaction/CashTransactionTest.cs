@@ -19,7 +19,8 @@ namespace FinancesTest.Model
         [TestMethod]
         public void createTest()
         {
-            IRecordIdManager recordIdManager = new MockRecordIdManager();
+            IRecordIdManagerFactory recordIdManagerFactory = new MockRecordIdManagerFactory();
+            IRecordIdManager recordIdManager = recordIdManagerFactory.create();
             ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(recordIdManager);
 
             DateTime jan012000 = new DateTime(2000,1,1);
@@ -31,6 +32,8 @@ namespace FinancesTest.Model
             Assert.AreEqual(jan012000, cashTransaction.Date);
         }
         #endregion
+
+        #region boilerplate TestContext
         private TestContext testContextInstance;
 
         /// <summary>
@@ -47,6 +50,8 @@ namespace FinancesTest.Model
             {
                 testContextInstance = value;
             }
-        }    
+        }
+        #endregion
+
     }
 }
