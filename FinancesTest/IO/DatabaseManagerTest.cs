@@ -9,11 +9,36 @@ namespace FinancesTest.IO
     public class DatabaseManagerTest
     {
         [TestMethod]
+        public void insertTest()
+        {
+
+        }
+        #region getInsertSqlTest
+        [TestMethod]
         public void getInsertSqlTest()
         {
-            
+            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1')", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "1"));
+            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B')", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "A", "B"));
+        }   
+    
+        [TestMethod]
+        [ExpectedException(typeof(invalidSqlException))]
+        public void getInsertSqlTableNameExceptionTest()
+        {
+            string tableName = null;
+            databaseManagerPrivate.Invoke("getInsertSql", tableName);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(invalidSqlException))]
+        public void getInsertSqlEmptyValuesExceptionTest()
+        {
+            string tableName = "TEST_TABLE";
+            databaseManagerPrivate.Invoke("getInsertSql", tableName);
+        }
+        #endregion
+
+        #region setup and teardown
         [TestInitialize]
         public void setup()
         {
@@ -28,34 +53,23 @@ namespace FinancesTest.IO
             {
                 Directory.CreateDirectory(fileSystemManager.getDataDirectory());
             }
+
+            IDatabaseManagerFactory databaseManagerFactory = new DatabaseManagerFactory(fileSystemManager);
+            databaseManager = databaseManagerFactory.create();
+            databaseManagerPrivate = new PrivateObject(databaseManager);
         }
 
         [TestCleanup]
-        public void cleanup()
+        public void teardown()
         {
             Directory.Delete(fileSystemManager.getDataDirectory(), true);
         }
+        #endregion
 
+        #region private members
         private IFileSystemManager fileSystemManager;
-
-        #region boilerplate TestContext
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        private IDatabaseManager databaseManager;
+        private PrivateObject databaseManagerPrivate;
         #endregion
     }
 }

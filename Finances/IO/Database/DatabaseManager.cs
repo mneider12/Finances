@@ -6,22 +6,32 @@ namespace Finances.IO
 {
     public class DatabaseManager : IDatabaseManager
     {
-        
 
+        #region public methods
         public bool insert(string tableName, params string[] values)
         {
             string insertSql = getInsertSql(tableName, values);
             int insertedRows = executeNonQuery(insertSql);
             return insertedRows == 1;
         }
+        #endregion
 
+        #region public constructors
         public DatabaseManager(IFileSystemManager fileSystemManager)
         {
             setDatabasePath(fileSystemManager);
         }
+        #endregion
 
+        #region private methods
         private string getInsertSql(string tableName, params string[] values)
         {
+            string message;
+            if (!validateInsertParameters(out message, tableName, values))
+            {
+                throw new invalidSqlException(message);
+            }
+
             string insertSql = "INSERT INTO " + tableName +
                                " VALUES (";
 
@@ -39,7 +49,25 @@ namespace Finances.IO
 
                 insertSql = insertSql + "'" + value + "'";
             }
-            return "";
+
+            insertSql = insertSql + ")";
+            return insertSql;
+        }
+
+        private bool validateInsertParameters(out string message, string tableName, params string[] values)
+        {
+            message = "";
+
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                message = "table name is required for insert command";
+            }
+            else if (values.Length == 0)
+            {
+                message = "values required for insert command";
+            }
+
+            return message.Equals("");
         }
 
         private int executeNonQuery(string sql)
@@ -70,9 +98,12 @@ namespace Finances.IO
         {
             databasePath = Path.Combine(fileSystemManager.getDataDirectory(), DATABASE_FILE_NAME);
         }
+        #endregion
 
+        #region private members
         private string databasePath;
 
         private const string DATABASE_FILE_NAME = "database.sqlite";
+        #endregion
     }
 }
