@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace Finances.Model
 {
@@ -29,23 +31,27 @@ namespace Finances.Model
         {
             this.fileSystemManager = fileSystemManager;
             nextIdMapPath = Path.Combine(fileSystemManager.getDataDirectory(), nextIdMapFileName);
-            serializer = new XmlSerializer(typeof(Dictionary<RecordType, int>));
+            serializer = new DataContractSerializer(typeof(Dictionary<RecordType, int>));
 
             if (isNew)
             {
-                load();
+                nextIdMap = new Dictionary<RecordType, int>();
+                save();
             }
             else
             {
-                nextIdMap = new Dictionary<RecordType, int>();
+                load();   
             }
         }
 
         private void load()
         {
-            using (StreamReader streamReader = new StreamReader(nextIdMapPath))
+            using (FileStream fileStream = new FileStream(nextIdMapPath, FileMode.Open))
             {
-                nextIdMap = (Dictionary<RecordType, int>)serializer.Deserialize(streamReader);
+                using (XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fileStream, new XmlDictionaryReaderQuotas()))
+                {
+                    nextIdMap = (Dictionary<RecordType, int>)serializer.ReadObject(reader);
+                }
             }
         }
 
@@ -53,14 +59,14 @@ namespace Finances.Model
         {
             using (FileStream fileStream = File.Create(nextIdMapPath))
             {
-                serializer.Serialize(fileStream, nextIdMap);
+                serializer.WriteObject(fileStream, nextIdMap);
             }
         }
 
         private Dictionary<RecordType, int> nextIdMap;
         private string nextIdMapPath;
         private IFileSystemManager fileSystemManager;
-        private XmlSerializer serializer;
+        private DataContractSerializer serializer;
 
         private const string nextIdMapFileName = "next_id.ser";
     }

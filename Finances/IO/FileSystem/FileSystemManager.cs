@@ -10,11 +10,20 @@ namespace Finances.IO
     {
         public string getDataDirectory()
         {
-            string directoryPath = Path.Combine(HOME_DIRECTORY, DATA_DIRECTORY);
-            return HttpContext.Current.Server.MapPath(directoryPath);
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string directoryPath = Path.Combine(appDataPath, APP_DIRECTORY, DATA_DIRECTORY);
+
+            if (HttpContext.Current == null)
+            {
+                return directoryPath;
+            }
+            else
+            {
+                return HttpContext.Current.Server.MapPath(directoryPath);
+            }
         }
 
-        private const string HOME_DIRECTORY = "~";
+        private const string APP_DIRECTORY = "Finances";
         private const string DATA_DIRECTORY = "data";
     }
 }

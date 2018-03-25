@@ -52,6 +52,7 @@
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net451\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -98,11 +99,13 @@
     <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdManager.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdManagerFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdMap.cs" />
+    <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdMapFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\MockRecordIdManager.cs" />
     <Compile Include="Model\Shared\RecordType.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\MockRecordIdManagerFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\RecordIdManager.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\RecordIdMap.cs" />
+    <Compile Include="Model\Shared\Record\RecordIdManager\RecordIdMapFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
