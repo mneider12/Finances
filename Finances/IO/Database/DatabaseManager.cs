@@ -10,6 +10,12 @@ namespace Finances.IO
     {
 
         #region public methods
+        /// <summary>
+        /// Insert one row into a table
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public bool insert(string tableName, params object[] values)
         {
             string insertSql = getInsertSql(tableName, values);

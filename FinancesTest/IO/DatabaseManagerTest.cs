@@ -11,7 +11,7 @@ namespace FinancesTest.IO
     public class DatabaseManagerTest
     {
         [TestMethod]
-        public void insertTest()
+        public void insertSelectDeleteTest()
         {
             string tableName = "test_table";
             int id = 1;
