@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace Finances.Model.Shared.Record.RecordIdManager
+namespace Finances.Model
 {
     public class RecordIdManager : IRecordIdManager
     {
@@ -38,5 +38,7 @@ namespace Finances.Model.Shared.Record.RecordIdManager
                 nextIdMap = (Dictionary<RecordType, int>) serializer.Deserialize(streamReader);
             }
         }
+
+
     }
 }
