@@ -20,22 +20,7 @@ namespace Finances.IO
         public List<NameValueCollection> select(string tableName, int primaryKey)
         {
             string selectSql = getSelectSql(tableName, primaryKey);
-
-            List<NameValueCollection> results = new List<NameValueCollection>();
-            using (SQLiteConnection databaseConnection = openDatabaseConnection())
-            {
-                using (SQLiteCommand command = new SQLiteCommand(selectSql, databaseConnection))
-                {
-                    using (SQLiteDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            results.Add(reader.GetValues());
-                        }
-                    }
-                }
-            }
-            return results;
+            return executeReader(selectSql);
         }
 
         public bool delete(string tableName, int primaryKey)
@@ -103,6 +88,42 @@ namespace Finances.IO
                 return command.ExecuteNonQuery();
             }
         }
+
+        #region executeReader
+        private List<NameValueCollection> executeReader(string selectSql)
+        {
+            using (SQLiteConnection databaseConnection = openDatabaseConnection())
+            {
+                return executeReader(selectSql, databaseConnection);
+            }
+        }
+
+        private List<NameValueCollection> executeReader(string selectSql, SQLiteConnection databaseConnection)
+        {
+            using (SQLiteCommand command = new SQLiteCommand(selectSql, databaseConnection))
+            {
+                return executeReader(command);
+            }
+        }
+
+        private static List<NameValueCollection> executeReader(SQLiteCommand command)
+        {
+            using (SQLiteDataReader reader = command.ExecuteReader())
+            {
+                return executeReader(reader);
+            }
+        }
+
+        private static List<NameValueCollection> executeReader(SQLiteDataReader reader)
+        {
+            List<NameValueCollection> results = new List<NameValueCollection>();
+            while (reader.Read())
+            {
+                results.Add(reader.GetValues());
+            }
+            return results;
+        }
+        #endregion
 
         private SQLiteConnection openDatabaseConnection()
         {
