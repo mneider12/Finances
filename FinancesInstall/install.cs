@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data.SQLite;
 
 namespace FinancesInstall
 {
@@ -13,28 +14,24 @@ namespace FinancesInstall
     {
         static void Main(string[] args)
         {
-            IFileSystemManagerFactory fileSystemManagerFactory;
-            IRecordIdMapFactory recordIdMapFactory;
-            createFactories(out fileSystemManagerFactory, out recordIdMapFactory);
+            IFileSystemManager fileSystemManager = new FileSystemManager();
+            IDatabaseManager databaseManager = new DatabaseManager(fileSystemManager);
+            
+            createFileSystem(fileSystemManager);
+            createDatabase(fileSystemManager);
 
-            IFileSystemManager fileSystemManager = createFileSystem(fileSystemManagerFactory);
-
-
-            IRecordIdMap recordIdMap = recordIdMapFactory.create(fileSystemManager);
+            IRecordIdMap recordIdMap = new RecordIdMap(fileSystemManager, true);
         }
 
-        private static void createFactories(out IFileSystemManagerFactory fileSystemManagerFactory, out IRecordIdMapFactory recordIdMapFactory)
+        private static void createFileSystem(IFileSystemManager fileSystemManager)
         {
-            fileSystemManagerFactory = new FileSystemManagerFactory();
-            recordIdMapFactory = new RecordIdMapFactory();
-        }
-
-        private static IFileSystemManager createFileSystem(IFileSystemManagerFactory fileSystemManagerFactory)
-        {
-            IFileSystemManager fileSystemManager = fileSystemManagerFactory.create();
             Directory.CreateDirectory(fileSystemManager.getDataDirectory());
+        }
 
-            return fileSystemManager;
+        private static void createDatabase(IFileSystemManager fileSystemManager)
+        {
+            DatabaseInstaller databaseInstaller = new DatabaseInstaller(fileSystemManager);
+            databaseInstaller.run();
         }
     }
 }

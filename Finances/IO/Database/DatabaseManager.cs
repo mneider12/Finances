@@ -79,7 +79,7 @@ namespace Finances.IO
             return "DELETE FROM " + tableName + " WHERE ID=" + primaryKey + ";";
         }
 
-        private int executeNonQuery(string sql)
+        protected int executeNonQuery(string sql)
         {
             using (SQLiteConnection databaseConnection = openDatabaseConnection())
             {
@@ -145,10 +145,10 @@ namespace Finances.IO
         }
         #endregion
 
-        #region private members
-        private string databasePath;
+        #region protected members
+        protected string databasePath;
 
-        private const string DATABASE_FILE_NAME = "database.sqlite";
+        protected const string DATABASE_FILE_NAME = "database.sqlite";
         #endregion
     }
 }

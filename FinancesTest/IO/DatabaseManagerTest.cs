@@ -41,17 +41,9 @@ namespace FinancesTest.IO
         [TestInitialize]
         public void setup()
         {
-            IFileSystemManagerFactory fileSystemManagerFactory = new MockFileSystemManagerFactory();
-            fileSystemManager = fileSystemManagerFactory.create();
-            IDatabaseManagerFactory databaseManagerFactory = new DatabaseManagerFactory(fileSystemManager);
-            databaseManager = databaseManagerFactory.create();
+            fileSystemManager = new MockFileSystemManager();
+            databaseManager = new DatabaseManager(fileSystemManager);
             databaseManagerPrivate = new PrivateObject(databaseManager);
-        }
-
-        [TestCleanup]
-        public void teardown()
-        {
-            
         }
         #endregion
 
