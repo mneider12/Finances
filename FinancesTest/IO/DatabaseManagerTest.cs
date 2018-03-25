@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using Finances.IO;
+using System.Data.SQLite;
+using System.Collections.Specialized;
 
 namespace FinancesTest.IO
 {
@@ -11,53 +13,27 @@ namespace FinancesTest.IO
         [TestMethod]
         public void insertTest()
         {
-            string tableName = "cash_transaction";
-            string id = "1";
-            string date;
+            string tableName = "test_table";
+            int id = 1;
+            long jan2000 = new DateTime(2000, 1, 1).Ticks;
+            decimal amount = 500.55m;
+
+            databaseManager.insert(tableName, id, jan2000, amount);
+
+            NameValueCollection values = databaseManager.select(tableName, id)[0];
+            Assert.AreEqual(id, int.Parse(values["id"]));
+            Assert.AreEqual(jan2000, long.Parse(values["date"]));
+            Assert.AreEqual(amount, decimal.Parse(values["amount"]));
+
+            databaseManager.delete(tableName, id);
         }
 
         #region getInsertSqlTest
         [TestMethod]
         public void getInsertSqlTest()
         {
-            getInsertSqlTableNameExceptionTest();
-            getInsertSqlEmptyValuesExceptionTest();
-
-            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1')", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "1"));
-            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B')", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "A", "B"));
-        }
-        
-        private void getInsertSqlTableNameExceptionTest()
-        {
-            try
-            {
-                string tableName = null;
-                databaseManagerPrivate.Invoke("getInsertSql", tableName);
-            }
-            catch (InvalidSqlException e)
-            {
-                Assert.AreEqual("table name is required for insert command", e.Message);
-                return;
-            }
-
-            Assert.Fail();  //expected to hit the exception
-        }   
-    
-
-        private void getInsertSqlEmptyValuesExceptionTest()
-        {
-            try
-            { 
-                string tableName = "TEST_TABLE";
-                databaseManagerPrivate.Invoke("getInsertSql", tableName);
-            }
-            catch (InvalidSqlException e)
-            {
-                Assert.AreEqual("values required for insert command", e.Message);
-                return;
-            }
-
-            Assert.Fail();
+            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1');", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "1"));
+            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B');", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "A", "B"));
         }
         #endregion
 
@@ -67,16 +43,6 @@ namespace FinancesTest.IO
         {
             IFileSystemManagerFactory fileSystemManagerFactory = new MockFileSystemManagerFactory();
             fileSystemManager = fileSystemManagerFactory.create();
-
-            if (Directory.Exists(fileSystemManager.getDataDirectory()))
-            {
-                Assert.Fail("test directory already exists");
-            }
-            else
-            {
-                Directory.CreateDirectory(fileSystemManager.getDataDirectory());
-            }
-
             IDatabaseManagerFactory databaseManagerFactory = new DatabaseManagerFactory(fileSystemManager);
             databaseManager = databaseManagerFactory.create();
             databaseManagerPrivate = new PrivateObject(databaseManager);
@@ -85,11 +51,11 @@ namespace FinancesTest.IO
         [TestCleanup]
         public void teardown()
         {
-            Directory.Delete(fileSystemManager.getDataDirectory(), true);
+            
         }
         #endregion
 
-        #region private members
+        #region private variables
         private IFileSystemManager fileSystemManager;
         private IDatabaseManager databaseManager;
         private PrivateObject databaseManagerPrivate;

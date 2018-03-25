@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.SQLite;
 using System.IO;
 
@@ -8,11 +10,39 @@ namespace Finances.IO
     {
 
         #region public methods
-        public bool insert(string tableName, params string[] values)
+        public bool insert(string tableName, params object[] values)
         {
             string insertSql = getInsertSql(tableName, values);
             int insertedRows = executeNonQuery(insertSql);
             return insertedRows == 1;
+        }
+
+        public List<NameValueCollection> select(string tableName, int primaryKey)
+        {
+            string selectSql = getSelectSql(tableName, primaryKey);
+
+            List<NameValueCollection> results = new List<NameValueCollection>();
+            using (SQLiteConnection databaseConnection = openDatabaseConnection())
+            {
+                using (SQLiteCommand command = new SQLiteCommand(selectSql, databaseConnection))
+                {
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            results.Add(reader.GetValues());
+                        }
+                    }
+                }
+            }
+            return results;
+        }
+
+        public bool delete(string tableName, int primaryKey)
+        {
+            string deleteSql = getDeleteSql(tableName, primaryKey);
+            int deletedRows = executeNonQuery(deleteSql);
+            return deletedRows == 1;
         }
         #endregion
 
@@ -24,19 +54,13 @@ namespace Finances.IO
         #endregion
 
         #region private methods
-        private string getInsertSql(string tableName, params string[] values)
+        private string getInsertSql(string tableName, params object[] values)
         {
-            string message;
-            if (!validateInsertParameters(out message, tableName, values))
-            {
-                throw new InvalidSqlException(message);
-            }
-
             string insertSql = "INSERT INTO " + tableName +
                                " VALUES (";
 
             bool firstValue = true;
-            foreach (string value in values)
+            foreach (object value in values)
             {
                 if (firstValue)
                 {
@@ -47,27 +71,21 @@ namespace Finances.IO
                     insertSql = insertSql + ",";
                 }
 
-                insertSql = insertSql + "'" + value + "'";
+                insertSql = insertSql + "'" + value.ToString() + "'";
             }
 
-            insertSql = insertSql + ")";
+            insertSql = insertSql + ");";
             return insertSql;
         }
 
-        private bool validateInsertParameters(out string message, string tableName, params string[] values)
+        private string getSelectSql(string tableName, int primaryKey)
         {
-            message = "";
+            return "SELECT * FROM " + tableName + " WHERE ID=" + primaryKey;
+        }
 
-            if (string.IsNullOrWhiteSpace(tableName))
-            {
-                message = "table name is required for insert command";
-            }
-            else if (values.Length == 0)
-            {
-                message = "values required for insert command";
-            }
-
-            return message.Equals("");
+        private string getDeleteSql(string tableName, int primaryKey)
+        {
+            return "DELETE FROM " + tableName + " WHERE ID=" + primaryKey + ";";
         }
 
         private int executeNonQuery(string sql)
