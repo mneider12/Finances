@@ -1,5 +1,6 @@
 ﻿using Finances.Model;
 using Finances.IO;
+using FinancesInstall.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,20 +18,14 @@ namespace FinancesInstall
             IFileSystemManager fileSystemManager = new FileSystemManager();
             IDatabaseManager databaseManager = new DatabaseManager(fileSystemManager);
             
-            createFileSystem(fileSystemManager);
-            createDatabase(fileSystemManager);
+            createDatabase(fileSystemManager, databaseManager);
 
             IRecordIdMap recordIdMap = new RecordIdMap(fileSystemManager, true);
         }
 
-        private static void createFileSystem(IFileSystemManager fileSystemManager)
+        private static void createDatabase(IFileSystemManager fileSystemManager, IDatabaseManager databaseManager)
         {
-            Directory.CreateDirectory(fileSystemManager.getDataDirectory());
-        }
-
-        private static void createDatabase(IFileSystemManager fileSystemManager)
-        {
-            DatabaseInstaller databaseInstaller = new DatabaseInstaller(fileSystemManager);
+            DatabaseInstaller databaseInstaller = new DatabaseInstaller(fileSystemManager, databaseManager);
             databaseInstaller.run();
         }
     }

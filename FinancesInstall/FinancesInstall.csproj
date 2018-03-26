@@ -49,8 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseInstaller.cs" />
+    <Compile Include="IO\DatabaseInstaller\DatabaseInstaller.cs" />
+    <Compile Include="IO\FileSystemInstaller\FileSystemInstaller.cs" />
     <Compile Include="Install.cs" />
+    <Compile Include="IO\FileSystemInstaller\IFileSystemInstaller.cs" />
+    <Compile Include="IO\DatabaseInstaller\IDatabaseInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

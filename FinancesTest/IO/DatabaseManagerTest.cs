@@ -28,14 +28,12 @@ namespace FinancesTest.IO
             databaseManager.delete(tableName, id);
         }
 
-        #region getInsertSqlTest
         [TestMethod]
         public void getInsertSqlTest()
         {
             Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1');", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "1"));
             Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B');", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "A", "B"));
         }
-        #endregion
 
         #region setup and teardown
         [TestInitialize]

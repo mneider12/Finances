@@ -27,7 +27,7 @@ namespace Finances.Model
 
         private void setNextIdMapPath(IFileSystemManager fileSystemManager)
         {
-            nextIdMapPath = Path.Combine(fileSystemManager.getDataDirectory(), nextIdMapFileName);
+            nextIdMapPath = fileSystemManager.getRecordIdMapPath();
         }
 
         private void loadNextIdMap(IFileSystemManager fileSystemManager)
@@ -38,7 +38,5 @@ namespace Finances.Model
                 nextIdMap = (Dictionary<RecordType, int>) serializer.Deserialize(streamReader);
             }
         }
-
-
     }
 }

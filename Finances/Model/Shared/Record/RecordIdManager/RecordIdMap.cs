@@ -30,7 +30,7 @@ namespace Finances.Model
         public RecordIdMap(IFileSystemManager fileSystemManager, bool isNew)
         {
             this.fileSystemManager = fileSystemManager;
-            nextIdMapPath = Path.Combine(fileSystemManager.getDataDirectory(), nextIdMapFileName);
+            nextIdMapPath = fileSystemManager.getRecordIdMapPath();
             serializer = new DataContractSerializer(typeof(Dictionary<RecordType, int>));
 
             if (isNew)

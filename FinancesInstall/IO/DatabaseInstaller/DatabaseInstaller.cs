@@ -6,18 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinancesInstall
+namespace FinancesInstall.IO
 {
-    public class DatabaseInstaller : DatabaseManager
+    public class DatabaseInstaller : IDatabaseInstaller
     {
-        public DatabaseInstaller(IFileSystemManager fileSystemManager) : base(fileSystemManager) { }
+        public DatabaseInstaller(IFileSystemManager fileSystemManager, IDatabaseManager databaseManager)
+        {
+            this.fileSystemManager = fileSystemManager;
+            this.databaseManager = databaseManager;
+        }
 
         public void run()
         {
-            SQLiteConnection.CreateFile(databasePath);
-
-
+            SQLiteConnection.CreateFile(fileSystemManager.getDatabasePath());
         }
+
+        private IFileSystemManager fileSystemManager;
+        private IDatabaseManager databaseManager;
 
         private void createCashTranasactionsTable()
         {
@@ -28,8 +33,7 @@ namespace FinancesInstall
                                                                 "PRIMARY KEY(`id`)" +
                                                                 ");";
 
-            executeNonQuery(createSql);
-
+            databaseManager.create(createSql);
         }
     }
 }

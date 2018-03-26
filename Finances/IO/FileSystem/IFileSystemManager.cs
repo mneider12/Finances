@@ -8,6 +8,8 @@ namespace Finances.IO
 {
     public interface IFileSystemManager
     {
-        string getDataDirectory();
+        string getDataDirectoryPath();
+        string getRecordIdMapPath();
+        string getDatabasePath();
     }
 }

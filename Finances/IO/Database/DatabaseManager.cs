@@ -35,6 +35,17 @@ namespace Finances.IO
             int deletedRows = executeNonQuery(deleteSql);
             return deletedRows == 1;
         }
+
+        /// <summary>
+        /// Super lazy implementation just used by DatabaseInstaller for now. Should make a smarter one.
+        /// </summary>
+        /// <param name="createSql"></param>
+        /// <returns></returns>
+        public bool create(string createSql)
+        {
+            executeNonQuery(createSql);
+            return true;
+        }
         #endregion
 
         #region public constructors
@@ -141,14 +152,12 @@ namespace Finances.IO
 
         private void setDatabasePath(IFileSystemManager fileSystemManager)
         {
-            databasePath = Path.Combine(fileSystemManager.getDataDirectory(), DATABASE_FILE_NAME);
+            databasePath = fileSystemManager.getDatabasePath();
         }
         #endregion
 
-        #region protected members
-        protected string databasePath;
-
-        protected const string DATABASE_FILE_NAME = "database.sqlite";
+        #region private members
+        private string databasePath;
         #endregion
     }
 }

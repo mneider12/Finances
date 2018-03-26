@@ -13,5 +13,6 @@ namespace Finances.IO
         bool insert(string tableName, params object[] values);
         List<NameValueCollection> select(string tableName, int primaryKey);
         bool delete(string tableName, int primaryKey);
+        bool create(string createSql);
     }
 }
