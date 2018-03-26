@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="IO\DatabaseManagerTest.cs" />
     <Compile Include="IO\MockFileSystemManager.cs" />
-    <Compile Include="IO\MockFileSystemManagerFactory.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

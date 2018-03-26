@@ -84,13 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\Database\DatabaseManager.cs" />
-    <Compile Include="IO\Database\DatabaseManagerFactory.cs" />
     <Compile Include="IO\Database\IDatabaseManager.cs" />
-    <Compile Include="IO\Database\IDatabaseManagerFactory.cs" />
     <Compile Include="IO\FileSystem\FileSystemManager.cs" />
-    <Compile Include="IO\FileSystem\FileSystemManagerFactory.cs" />
     <Compile Include="IO\FileSystem\IFileSystemManager.cs" />
-    <Compile Include="IO\FileSystem\IFileSystemManagerFactory.cs" />
     <Compile Include="Model\CashTransaction\CashTransaction.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionFactory.cs" />
     <Compile Include="Model\CashTransaction\ICashTransaction.cs" />
