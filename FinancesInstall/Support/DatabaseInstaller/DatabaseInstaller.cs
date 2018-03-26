@@ -19,6 +19,7 @@ namespace FinancesInstall.Support
         public void run()
         {
             SQLiteConnection.CreateFile(fileSystemManager.getDatabasePath());
+            createCashTranasactionsTable();
         }
 
         private IFileSystemManager fileSystemManager;

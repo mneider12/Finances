@@ -5,14 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancesTest", "FinancesTest\FinancesTest.csproj", "{609C8605-CDD1-4097-8F98-E1EDF61DD6D9}"
 	ProjectSection(ProjectDependencies) = postProject
+		{EC44492F-96DD-452F-AD51-4AD2E21EEE21} = {EC44492F-96DD-452F-AD51-4AD2E21EEE21}
 		{50D01AD7-29C8-4416-8D3A-C01ECADD8CE5} = {50D01AD7-29C8-4416-8D3A-C01ECADD8CE5}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances", "Finances\Finances.csproj", "{50D01AD7-29C8-4416-8D3A-C01ECADD8CE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancesInstall", "FinancesInstall\FinancesInstall.csproj", "{EC44492F-96DD-452F-AD51-4AD2E21EEE21}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancesInstallTest", "FinancesInstallTest\FinancesInstallTest.csproj", "{5EB5EF36-4B7B-4691-8235-391C3AA3282D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +31,6 @@ Global
 		{EC44492F-96DD-452F-AD51-4AD2E21EEE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC44492F-96DD-452F-AD51-4AD2E21EEE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC44492F-96DD-452F-AD51-4AD2E21EEE21}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EB5EF36-4B7B-4691-8235-391C3AA3282D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EB5EF36-4B7B-4691-8235-391C3AA3282D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EB5EF36-4B7B-4691-8235-391C3AA3282D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EB5EF36-4B7B-4691-8235-391C3AA3282D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -39,6 +39,6 @@ namespace FinancesTest.IO
 
         private const string DATA_DIRECTORY = "data";
         private const string RECORD_ID_MAP_FILE_NAME = "next_id.ser";
-        private const string DATABASE_FILE_NAME = "database.db";
+        private const string DATABASE_FILE_NAME = "database.sqlite";
     }
 }

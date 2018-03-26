@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using Finances.IO;
+using FinancesTest.Install;
 using System.Data.SQLite;
 using System.Collections.Specialized;
 
@@ -13,7 +14,7 @@ namespace FinancesTest.IO
         [TestMethod]
         public void insertSelectDeleteTest()
         {
-            string tableName = "test_table";
+            string tableName = "cash_transaction";
             int id = 1;
             long jan2000 = new DateTime(2000, 1, 1).Ticks;
             decimal amount = 500.55m;
@@ -39,6 +40,7 @@ namespace FinancesTest.IO
         [TestInitialize]
         public void setup()
         {
+            TestInstall.Main(null);
             fileSystemManager = new MockFileSystemManager();
             databaseManager = new DatabaseManager(fileSystemManager);
             databaseManagerPrivate = new PrivateObject(databaseManager);

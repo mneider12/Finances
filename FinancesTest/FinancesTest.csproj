@@ -59,12 +59,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Install\TestInstall.cs" />
     <Compile Include="IO\DatabaseManagerTest.cs" />
     <Compile Include="IO\MockFileSystemManager.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FinancesInstall\FinancesInstall.csproj">
+      <Project>{ec44492f-96dd-452f-ad51-4ad2e21eee21}</Project>
+      <Name>FinancesInstall</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Finances\Finances.csproj">
       <Project>{50D01AD7-29C8-4416-8D3A-C01ECADD8CE5}</Project>
       <Name>Finances</Name>
