@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinancesInstall.IO
+namespace FinancesInstall.Support
 {
     public interface IFileSystemInstaller
     {
-        void create(IFileSystemManager fileSystemManager);
+        void run();
     }
 }

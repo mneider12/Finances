@@ -6,13 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinancesInstall.IO
+namespace FinancesInstall.Support
 {
     public class FileSystemInstaller : IFileSystemInstaller
     {
-        public void create(IFileSystemManager fileSystemManager)
+        public FileSystemInstaller(IFileSystemManager fileSystemManager)
+        {
+            this.fileSystemManager = fileSystemManager;
+        }
+
+        public void run()
         {
             Directory.CreateDirectory(fileSystemManager.getDataDirectoryPath());
         }
+
+        private IFileSystemManager fileSystemManager;
     }
 }

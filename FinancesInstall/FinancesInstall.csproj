@@ -49,11 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IO\DatabaseInstaller\DatabaseInstaller.cs" />
-    <Compile Include="IO\FileSystemInstaller\FileSystemInstaller.cs" />
-    <Compile Include="Install.cs" />
-    <Compile Include="IO\FileSystemInstaller\IFileSystemInstaller.cs" />
-    <Compile Include="IO\DatabaseInstaller\IDatabaseInstaller.cs" />
+    <Compile Include="Support\IInstaller.cs" />
+    <Compile Include="Support\Installer.cs" />
+    <Compile Include="Support\DatabaseInstaller\DatabaseInstaller.cs" />
+    <Compile Include="Support\FileSystemInstaller\FileSystemInstaller.cs" />
+    <Compile Include="Main\Install.cs" />
+    <Compile Include="Support\FileSystemInstaller\IFileSystemInstaller.cs" />
+    <Compile Include="Support\DatabaseInstaller\IDatabaseInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

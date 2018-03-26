@@ -1,23 +1,21 @@
-﻿using Finances.Model;
-using Finances.IO;
-using FinancesInstall.IO;
+﻿using Finances.IO;
+using Finances.Model;
+using FinancesTest.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using System.Data.SQLite;
 
-namespace FinancesInstall
+namespace FinancesInstallTest.IO
 {
-    class Install
+    public class TestInstall
     {
         static void Main(string[] args)
         {
-            IFileSystemManager fileSystemManager = new FileSystemManager();
+            IFileSystemManager fileSystemManager = new MockFileSystemManager();
             IDatabaseManager databaseManager = new DatabaseManager(fileSystemManager);
-            
+
             createDatabase(fileSystemManager, databaseManager);
 
             IRecordIdMap recordIdMap = new RecordIdMap(fileSystemManager, true);

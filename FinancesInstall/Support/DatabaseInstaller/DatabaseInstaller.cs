@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinancesInstall.IO
+namespace FinancesInstall.Support
 {
     public class DatabaseInstaller : IDatabaseInstaller
     {
