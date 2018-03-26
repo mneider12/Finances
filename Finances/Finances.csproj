@@ -93,15 +93,11 @@
     <Compile Include="Model\CashTransaction\ICashTransactionFactory.cs" />
     <Compile Include="Model\Shared\Record\IRecord.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdManager.cs" />
-    <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdManagerFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdMap.cs" />
-    <Compile Include="Model\Shared\Record\RecordIdManager\IRecordIdMapFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\MockRecordIdManager.cs" />
     <Compile Include="Model\Shared\RecordType.cs" />
-    <Compile Include="Model\Shared\Record\RecordIdManager\MockRecordIdManagerFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\RecordIdManager.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\RecordIdMap.cs" />
-    <Compile Include="Model\Shared\Record\RecordIdManager\RecordIdMapFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

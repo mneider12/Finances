@@ -19,8 +19,7 @@ namespace FinancesTest.Model
         [TestMethod]
         public void createTest()
         {
-            IRecordIdManagerFactory recordIdManagerFactory = new MockRecordIdManagerFactory();
-            IRecordIdManager recordIdManager = recordIdManagerFactory.create();
+            IRecordIdManager recordIdManager = new MockRecordIdManager();
             ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(recordIdManager);
 
             DateTime jan012000 = new DateTime(2000,1,1);
