@@ -16,7 +16,7 @@ namespace Finances.IO
         /// <param name="tableName">name of the table to insert into</param>
         /// <param name="values">values to insert. Calls the toString method for each object</param>
         /// <returns>true on sucess, false on failure</returns>
-        public bool insert(string tableName, params object[] values)
+        public bool insertOne(string tableName, params object[] values)
         {
             string insertSql = getInsertSql(tableName, values);
             int insertedRows = executeNonQuery(insertSql);
@@ -24,18 +24,24 @@ namespace Finances.IO
         }
 
         /// <summary>
-        /// 
+        /// Select one record from a table
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="primaryKey"></param>
-        /// <returns></returns>
-        public List<NameValueCollection> select(string tableName, int primaryKey)
+        /// <param name="tableName">name of table to select from</param>
+        /// <param name="primaryKey">primary key</param>
+        /// <returns>column values</returns>
+        public NameValueCollection selectOne(string tableName, int primaryKey)
         {
             string selectSql = getSelectSql(tableName, primaryKey);
-            return executeReader(selectSql);
+            return executeReader(selectSql)[0];
         }
 
-        public bool delete(string tableName, int primaryKey)
+        /// <summary>
+        /// Delete one record from a table
+        /// </summary>
+        /// <param name="tableName">name of table to delete from</param>
+        /// <param name="primaryKey">primary key</param>
+        /// <returns>true on success, false on failure</returns>
+        public bool deleteOne(string tableName, int primaryKey)
         {
             string deleteSql = getDeleteSql(tableName, primaryKey);
             int deletedRows = executeNonQuery(deleteSql);

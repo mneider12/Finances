@@ -10,9 +10,9 @@ namespace Finances.IO
 {
     public interface IDatabaseManager
     {
-        bool insert(string tableName, params object[] values);
-        List<NameValueCollection> select(string tableName, int primaryKey);
-        bool delete(string tableName, int primaryKey);
+        bool insertOne(string tableName, params object[] values);
+        NameValueCollection selectOne(string tableName, int primaryKey);
+        bool deleteOne(string tableName, int primaryKey);
         bool create(string createSql);
     }
 }

@@ -19,14 +19,14 @@ namespace FinancesTest.IO
             long jan2000 = new DateTime(2000, 1, 1).Ticks;
             decimal amount = 500.55m;
 
-            databaseManager.insert(tableName, id, jan2000, amount);
+            databaseManager.insertOne(tableName, id, jan2000, amount);
 
-            NameValueCollection values = databaseManager.select(tableName, id)[0];
+            NameValueCollection values = databaseManager.selectOne(tableName, id);
             Assert.AreEqual(id, int.Parse(values["id"]));
             Assert.AreEqual(jan2000, long.Parse(values["date"]));
             Assert.AreEqual(amount, decimal.Parse(values["amount"]));
 
-            databaseManager.delete(tableName, id);
+            databaseManager.deleteOne(tableName, id);
         }
 
         [TestMethod]
