@@ -18,7 +18,7 @@ namespace Finances.IO
         /// <returns>true on sucess, false on failure</returns>
         public bool insertOne(string tableName, params object[] values)
         {
-            string insertSql = getInsertSql(tableName, values);
+            string insertSql = getInsertOneSql(tableName, values);
             int insertedRows = executeNonQuery(insertSql);
             return insertedRows == 1;
         }
@@ -31,7 +31,7 @@ namespace Finances.IO
         /// <returns>column values</returns>
         public NameValueCollection selectOne(string tableName, int primaryKey)
         {
-            string selectSql = getSelectSql(tableName, primaryKey);
+            string selectSql = getSelectOneSql(tableName, primaryKey);
             return executeReader(selectSql)[0];
         }
 
@@ -68,7 +68,7 @@ namespace Finances.IO
         #endregion
 
         #region private methods
-        private string getInsertSql(string tableName, params object[] values)
+        private string getInsertOneSql(string tableName, params object[] values)
         {
             string insertSql = "INSERT INTO " + tableName +
                                " VALUES (";
@@ -92,9 +92,9 @@ namespace Finances.IO
             return insertSql;
         }
 
-        private string getSelectSql(string tableName, int primaryKey)
+        private string getSelectOneSql(string tableName, int primaryKey)
         {
-            return "SELECT * FROM " + tableName + " WHERE ID=" + primaryKey;
+            return "SELECT * FROM " + tableName + " WHERE id=" + primaryKey;
         }
 
         private string getDeleteSql(string tableName, int primaryKey)

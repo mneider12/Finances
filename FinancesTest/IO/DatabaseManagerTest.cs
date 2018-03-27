@@ -12,7 +12,7 @@ namespace FinancesTest.IO
     public class DatabaseManagerTest
     {
         [TestMethod]
-        public void insertSelectDeleteTest()
+        public void insertSelectDeleteOneTest()
         {
             string tableName = "cash_transaction";
             int id = 1;
@@ -32,8 +32,14 @@ namespace FinancesTest.IO
         [TestMethod]
         public void getInsertSqlTest()
         {
-            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1');", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "1"));
-            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B');", databaseManagerPrivate.Invoke("getInsertSql", "TEST_TABLE", "A", "B"));
+            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1');", databaseManagerPrivate.Invoke("getInsertOneSql", "TEST_TABLE", "1"));
+            Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B');", databaseManagerPrivate.Invoke("getInsertOneSql", "TEST_TABLE", "A", "B"));
+        }
+
+        [TestMethod]
+        public void getSelectOneSqlTest()
+        {
+            Assert.AreEqual("SELECT * FROM TEST_TABLE WHERE id=1", databaseManagerPrivate.Invoke("getSelectOneSql", "TEST_TABLE", 1));
         }
 
         #region setup and teardown
