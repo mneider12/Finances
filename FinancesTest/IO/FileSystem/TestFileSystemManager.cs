@@ -1,21 +1,17 @@
 ﻿using Finances.IO;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinancesTest.IO
 {
-    public class MockFileSystemManager : IFileSystemManager
+    public class TestFileSystemManager : IFileSystemManager
     {
         public void cleanup()
         {
             Directory.Delete(dataDirectoryPath, true);
         }
 
-        public MockFileSystemManager()
+        public TestFileSystemManager()
         {
             setDataDirectory();
         }

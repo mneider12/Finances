@@ -102,7 +102,7 @@ namespace Finances.IO
             return "DELETE FROM " + tableName + " WHERE ID=" + primaryKey + ";";
         }
 
-        protected int executeNonQuery(string sql)
+        private int executeNonQuery(string sql)
         {
             using (SQLiteConnection databaseConnection = openDatabaseConnection())
             {

@@ -47,7 +47,7 @@ namespace FinancesTest.IO
         public void initialize()
         {
             TestInstall.Main(null);
-            fileSystemManager = new MockFileSystemManager();
+            fileSystemManager = new TestFileSystemManager();
             databaseManager = new DatabaseManager(fileSystemManager);
             databaseManagerPrivate = new PrivateObject(databaseManager);
         }
@@ -60,7 +60,7 @@ namespace FinancesTest.IO
         #endregion
 
         #region private variables
-        private MockFileSystemManager fileSystemManager;
+        private TestFileSystemManager fileSystemManager;
         private IDatabaseManager databaseManager;
         private PrivateObject databaseManagerPrivate;
         #endregion

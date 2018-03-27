@@ -7,7 +7,6 @@ namespace Finances.Model
 {
     public interface IRecordIdMap
     {
-        int getNextId(RecordType type);
-        void setNextId(RecordType type, int nextId);
+        int this[RecordType type] { get; set; }
     }
 }

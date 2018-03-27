@@ -8,7 +8,7 @@ namespace FinancesTest.Install
     {
         public static void Main(string[] args)
         {
-            IFileSystemManager fileSystemManager = new MockFileSystemManager();
+            IFileSystemManager fileSystemManager = new TestFileSystemManager();
 
             Installer installer = new Installer(fileSystemManager);
             installer.run();
