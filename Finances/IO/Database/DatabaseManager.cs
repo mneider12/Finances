@@ -13,9 +13,9 @@ namespace Finances.IO
         /// <summary>
         /// Insert one row into a table
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        /// <param name="tableName">name of the table to insert into</param>
+        /// <param name="values">values to insert. Calls the toString method for each object</param>
+        /// <returns>true on sucess, false on failure</returns>
         public bool insert(string tableName, params object[] values)
         {
             string insertSql = getInsertSql(tableName, values);
@@ -23,6 +23,12 @@ namespace Finances.IO
             return insertedRows == 1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="primaryKey"></param>
+        /// <returns></returns>
         public List<NameValueCollection> select(string tableName, int primaryKey)
         {
             string selectSql = getSelectSql(tableName, primaryKey);

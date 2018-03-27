@@ -10,6 +10,11 @@ namespace FinancesTest.IO
 {
     public class MockFileSystemManager : IFileSystemManager
     {
+        public void cleanup()
+        {
+            Directory.Delete(dataDirectoryPath, true);
+        }
+
         public MockFileSystemManager()
         {
             setDataDirectory();

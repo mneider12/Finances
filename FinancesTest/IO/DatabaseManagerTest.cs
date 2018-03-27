@@ -38,17 +38,23 @@ namespace FinancesTest.IO
 
         #region setup and teardown
         [TestInitialize]
-        public void setup()
+        public void initialize()
         {
             TestInstall.Main(null);
             fileSystemManager = new MockFileSystemManager();
             databaseManager = new DatabaseManager(fileSystemManager);
             databaseManagerPrivate = new PrivateObject(databaseManager);
         }
+
+        [TestCleanup]
+        public void cleanup()
+        {
+            fileSystemManager.cleanup();
+        }
         #endregion
 
         #region private variables
-        private IFileSystemManager fileSystemManager;
+        private MockFileSystemManager fileSystemManager;
         private IDatabaseManager databaseManager;
         private PrivateObject databaseManagerPrivate;
         #endregion
