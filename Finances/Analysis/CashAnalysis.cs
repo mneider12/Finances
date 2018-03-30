@@ -8,20 +8,43 @@ namespace Finances.Analysis
 {
     public class CashAnalysis : ICashAnalysis
     {
-        public double getRateOfReturn(List<ICashTransaction> cashTransactions, decimal presentValue)
+        public double getRateOfReturn(List<ICashTransaction> cashTransactions, double presentValue)
         {
-            return getRateOfReturn(cashTransactions, presentValue, INITIAL_GUESS, INITIAL_INCREMENT);
+            double lastGuessRateOfReturn = INITIAL_GUESS_RATE_OF_RETURN;
+            double lastGuessPresentValue = getPresentValue(cashTransactions, lastGuessRateOfReturn);
+            double lastGuessError = presentValue - lastGuessPresentValue;
+
+            while (true)
+            {
+                double newGuessRateOfReturn;
+                if (lastGuessError < 0)
+                {
+                    newGuessRateOfReturn = lastGuessRateOfReturn - INITIAL_INCREMENT_RATE_OF_RETURN;
+                }
+                else
+                {
+                    newGuessRateOfReturn = lastGuessRateOfReturn + INITIAL_INCREMENT_RATE_OF_RETURN;
+                }
+
+                double newGuessPresentValue = getPresentValue(cashTransactions, newGuessRateOfReturn);
+                double newGuessError = presentValue - newGuessPresentValue;
+
+                if (newGuessError > lastGuessError)
+                {
+                    return Math.Round(lastGuessRateOfReturn,2);
+                }
+                else
+                {
+                    lastGuessRateOfReturn = newGuessRateOfReturn;
+                    lastGuessPresentValue = newGuessPresentValue;
+                    lastGuessError = newGuessError;
+                }
+            }
         }
 
-        private const double INITIAL_GUESS = .05;
-        private const double INITIAL_INCREMENT = .0001;
+        private const double INITIAL_GUESS_RATE_OF_RETURN = .05;
+        private const double INITIAL_INCREMENT_RATE_OF_RETURN = .0001;
         private const double DAYS_PER_YEAR = 365.25;
-
-
-        private double getRateOfReturn(List<ICashTransaction> cashTransactions, decimal presentValue, double guess, double increment)
-        {
-            throw new NotImplementedException(); 
-        }
 
         private double getPresentValue(List<ICashTransaction> cashTransactions, double annualRateOfReturn)
         {

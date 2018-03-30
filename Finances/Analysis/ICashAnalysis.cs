@@ -9,6 +9,6 @@ namespace Finances.Analysis
 {
     public interface ICashAnalysis
     {
-        double getRateOfReturn(List<ICashTransaction> cashTransactions, decimal presentValue);
+        double getRateOfReturn(List<ICashTransaction> cashTransactions, double presentValue);
     }
 }
