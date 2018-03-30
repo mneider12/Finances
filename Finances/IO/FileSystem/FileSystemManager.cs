@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace Finances.IO
@@ -26,6 +27,14 @@ namespace Finances.IO
         public string getDatabasePath()
         {
             return Path.Combine(dataDirectoryPath, DATABASE_FILE_NAME);
+        }
+
+        public void serialize(object graph, string path, XmlObjectSerializer serializer)
+        {
+            using (FileStream fileStream = File.Create(path))
+            {
+                serializer.WriteObject(fileStream, graph);
+            }
         }
 
         private string dataDirectoryPath;

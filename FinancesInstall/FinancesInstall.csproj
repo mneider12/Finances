@@ -57,6 +57,7 @@
     <Compile Include="Support\FileSystemInstaller\IFileSystemInstaller.cs" />
     <Compile Include="Support\DatabaseInstaller\IDatabaseInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\RecordIdManager\RecordIdMapInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

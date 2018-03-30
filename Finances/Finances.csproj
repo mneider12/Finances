@@ -83,6 +83,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\CashAnalysis.cs" />
+    <Compile Include="Analysis\ICashAnalysis.cs" />
     <Compile Include="IO\Database\DatabaseManager.cs" />
     <Compile Include="IO\Database\IDatabaseManager.cs" />
     <Compile Include="IO\FileSystem\FileSystemManager.cs" />

@@ -43,6 +43,8 @@
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net451\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -59,10 +61,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Analysis\CashAnalysisTest.cs" />
     <Compile Include="Install\TestInstall.cs" />
     <Compile Include="IO\Database\DatabaseManagerTest.cs" />
     <Compile Include="IO\FileSystem\TestFileSystemManager.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionTest.cs" />
+    <Compile Include="Model\CashTransaction\MockCashTransactionFactory.cs" />
     <Compile Include="Model\Shared\Record\RecordIdManager\RecordIdMapTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

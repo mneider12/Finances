@@ -1,6 +1,7 @@
 ﻿using Finances.IO;
 using System;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace FinancesTest.IO
 {
@@ -29,6 +30,14 @@ namespace FinancesTest.IO
         public string getDatabasePath()
         {
             return Path.Combine(dataDirectoryPath, DATABASE_FILE_NAME);
+        }
+
+        public void serialize(object graph, string path, XmlObjectSerializer serializer)
+        {
+            using (FileStream fileStream = File.Create(path))
+            {
+                serializer.WriteObject(fileStream, graph);
+            }
         }
 
         private void setDataDirectory()

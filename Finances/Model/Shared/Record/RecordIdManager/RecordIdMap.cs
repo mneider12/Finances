@@ -21,7 +21,7 @@ namespace Finances.Model
             set
             {
                 nextIdMap[type] = value;
-                save();
+                fileSystemManager.serialize(nextIdMap, nextIdMapPath, serializer);
             }
         }
 
@@ -39,7 +39,7 @@ namespace Finances.Model
             if (isNew)
             {
                 nextIdMap = new Dictionary<RecordType, int>();
-                save();
+                fileSystemManager.serialize(nextIdMap, nextIdMapPath, serializer);
             }
             else
             {
@@ -55,14 +55,6 @@ namespace Finances.Model
                 {
                     nextIdMap = (Dictionary<RecordType, int>)serializer.ReadObject(reader);
                 }
-            }
-        }
-
-        private void save()
-        {
-            using (FileStream fileStream = File.Create(nextIdMapPath))
-            {
-                serializer.WriteObject(fileStream, nextIdMap);
             }
         }
 
