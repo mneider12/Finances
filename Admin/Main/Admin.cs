@@ -10,11 +10,17 @@ using System.Threading.Tasks;
 
 namespace Admin.Main
 {
-    class Admin
+    /// <summary>
+    /// class to house the admin console main method
+    /// </summary>
+    public static class Admin
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// run the administrator console
+        /// right now it will load the file Import/cash_transactions_individual.txt into the database.
+        /// </summary>
+        public static void Main()
         {
-
             IFileSystemManager fileSystemManager = new FileSystemManager();
             IRecordIdManager recordIdManager = new RecordIdManager(fileSystemManager);
             ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(recordIdManager);
