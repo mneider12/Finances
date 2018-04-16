@@ -3,9 +3,16 @@ using System;
 
 namespace Finances.Model
 {
+    /// <summary>
+    /// Represent a "cash" transaction
+    /// A cash transaction is a deposit or withdrawl (withdrawls have negative amounts, deposits have positive amounts)
+    /// </summary>
     public class CashTransaction : ICashTransaction
     {
         #region ICashTransaction members
+        /// <summary>
+        /// internal unique identifier
+        /// </summary>
         public int Id
         {
             get
@@ -13,6 +20,9 @@ namespace Finances.Model
                 return id;
             }
         }
+        /// <summary>
+        /// date the transaction occured
+        /// </summary>
         public DateTime Date
         {
             get
@@ -20,7 +30,10 @@ namespace Finances.Model
                 return date;
             }
         }
-
+        /// <summary>
+        /// amount of the transaction.
+        /// negative amounts indicate withdrawls
+        /// </summary>
         public decimal Amount
         {
             get
@@ -29,13 +42,6 @@ namespace Finances.Model
             }
         }
         #endregion
-        #region IRecord members
-        public bool save(IDatabaseManager databaseManager)
-        {
-            return true;
-        }
-        #endregion
-
         #region constructors
         public CashTransaction(IRecordIdManager recordManager, DateTime date, decimal amount)
         {

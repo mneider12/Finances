@@ -12,12 +12,15 @@ namespace Finances.Model
     {
         public int getNextId(RecordType type)
         {
-            throw new NotImplementedException();
+            int nextId = nextIdMap[type];
+            nextIdMap[type]++;
+            return nextId;
         }
 
         public RecordIdManager(IFileSystemManager fileSystemManager)
         {
             setNextIdMapPath(fileSystemManager);
+            loadNextIdMap(fileSystemManager);
         }
 
         private Dictionary<RecordType, int> nextIdMap;
@@ -32,6 +35,7 @@ namespace Finances.Model
 
         private void loadNextIdMap(IFileSystemManager fileSystemManager)
         {
+            //fileSystemManager.des
             XmlSerializer serializer = new XmlSerializer(typeof(Dictionary<RecordType, int>));
             using (StreamReader streamReader = new StreamReader(nextIdMapPath))
             {

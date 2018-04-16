@@ -37,6 +37,12 @@ namespace Finances.IO
             }
         }
 
+        public FileStream openFile(string relativeFilePath)
+        {
+            string fullFilePath = Path.Combine(dataDirectoryPath, relativeFilePath);
+            return File.OpenRead(fullFilePath);
+        }
+
         private string dataDirectoryPath;
 
         private const string APP_DIRECTORY = "Finances";

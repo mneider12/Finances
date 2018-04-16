@@ -2,7 +2,7 @@
 
 namespace Finances.Model
 {
-    public interface ICashTransaction : IRecord
+    public interface ICashTransaction
     {
         int Id { get; }
         DateTime Date { get; }

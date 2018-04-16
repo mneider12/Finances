@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -14,5 +15,6 @@ namespace Finances.IO
         string getDatabasePath();
 
         void serialize(object graph, string path, XmlObjectSerializer serializer);
+        FileStream openFile(string relativePath);
     }
 }

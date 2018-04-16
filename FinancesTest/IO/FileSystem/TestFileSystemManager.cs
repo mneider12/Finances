@@ -45,6 +45,11 @@ namespace FinancesTest.IO
             dataDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DATA_DIRECTORY);
         }
 
+        public FileStream openFile(string relativePath)
+        {
+            throw new NotImplementedException();
+        }
+
         private string dataDirectoryPath;
 
         private const string DATA_DIRECTORY = "data";
