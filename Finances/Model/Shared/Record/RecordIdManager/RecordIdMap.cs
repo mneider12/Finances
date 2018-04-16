@@ -12,17 +12,12 @@ namespace Finances.Model
 {
     public class RecordIdMap : IRecordIdMap
     {
-        public int this[RecordType type]
+        public int getNextId(RecordType type)
         {
-            get
-            {
-                return nextIdMap[type];
-            }
-            set
-            {
-                nextIdMap[type] = value;
-                fileSystemManager.serialize(nextIdMap, nextIdMapPath, serializer);
-            }
+            int nextId = nextIdMap[type];
+            nextIdMap[type]++;
+            save();
+            return nextId;
         }
 
         public RecordIdMap(IFileSystemManager fileSystemManager) : this(fileSystemManager, false)
@@ -45,6 +40,11 @@ namespace Finances.Model
             {
                 load();   
             }
+        }
+
+        private void save()
+        {
+
         }
 
         private void load()

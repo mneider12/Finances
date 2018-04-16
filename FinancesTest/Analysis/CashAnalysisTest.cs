@@ -24,14 +24,16 @@ namespace FinancesTest.Analysis
             ICashTransactionFactory cashTransactionFactory = new MockCashTransactionFactory();
 
             DateTime date = DateTime.Today.Subtract(new TimeSpan(365, 6, 0, 0, 0)); // exactly one year ago (year = 365.25 days)
-            decimal amount = 500m;
-            cashTransactions.Add(cashTransactionFactory.create(date, amount));
+            decimal amount = 500;
+            ICashTransaction cashTransaction = cashTransactionFactory.create(date, amount);
+            cashTransactions.Add(cashTransaction);
 
             ICashAnalysis cashAnalysis = new CashAnalysis();
 
             Assert.AreEqual(.5, cashAnalysis.getRateOfReturn(cashTransactions, 750d));
 
-            cashTransactions.Add(cashTransactionFactory.create(date, amount));
+            cashTransaction = cashTransactionFactory.create(date, amount);
+            cashTransactions.Add(cashTransaction);
 
             Assert.AreEqual(.5, cashAnalysis.getRateOfReturn(cashTransactions, 1500d));
         }
