@@ -5,11 +5,8 @@ using System.Web;
 
 namespace Finances.IO
 {
-    public class LocalPathEnum
+    public enum LogicalDirectory
     {
-        public enum LocalPath
-        {
-            Import, Home
-        }
+        Import, Home
     }
 }

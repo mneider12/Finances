@@ -91,6 +91,7 @@
     <Compile Include="IO\Database\IDatabaseManager.cs" />
     <Compile Include="IO\FileSystem\FileSystemManager.cs" />
     <Compile Include="IO\FileSystem\IFileSystemManager.cs" />
+    <Compile Include="IO\FileSystem\LogicalDirectoryEnum.cs" />
     <Compile Include="Model\CashTransaction\CashTransaction.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionFactory.cs" />
     <Compile Include="Model\CashTransaction\ICashTransaction.cs" />
