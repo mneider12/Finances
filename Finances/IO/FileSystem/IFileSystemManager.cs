@@ -10,7 +10,7 @@ namespace Finances.IO
 {
     public interface IFileSystemManager
     {
-        string getFilePath(string fileName, LogicalDirectory logicalDirectory);
-        void save(object data, string filePath);
+        void save(object data, LocalFile file);
+        object load(Type type, LocalFile file);
     }
 }

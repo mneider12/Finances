@@ -21,7 +21,7 @@ namespace Finances.Import
         {
             List<ICashTransaction> cashTransactions = new List<ICashTransaction>();
 
-            using (FileStream fileStream = fileSystemManager.openFile(relativeFilePath))
+            using (FileStream fileStream = File.Create(relativeFilePath))
             {
                 using (StreamReader reader = new StreamReader(fileStream))
                 {

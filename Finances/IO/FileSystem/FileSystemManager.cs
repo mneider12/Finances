@@ -13,83 +13,96 @@ namespace Finances.IO
     public class FileSystemManager : IFileSystemManager
     {
         /// <summary>
-        /// Get an absolute file path for a file within a logical directory
+        /// Save an object to a local file
         /// </summary>
-        /// <param name="fileName">name of the file</param>
-        /// <param name="logicalDirectory">logical directory</param>
-        /// <returns>absolute file path</returns>
-        public string getFilePath(string fileName, LogicalDirectory logicalDirectory)
+        /// <param name="data">object to save</param>
+        /// <param name="file">file to save to</param>
+        public void save(object data, LocalFile file)
         {
-            switch (logicalDirectory)
-            {
-                case LogicalDirectory.Import:
-                    return Path.Combine(getDataDirectoryPath(), IMPORT_DIRECTORY);
-                case LogicalDirectory.Home:
-                default:
-                    return getDataDirectoryPath();
-            }
-        }
-
-        /// <summary>
-        /// Create the file system manager.
-        /// Caches the data directory
-        /// </summary>
-        public FileSystemManager()
-        {
-            setDataDirectory();
-        }
-
-        private string getDataDirectoryPath()
-        {
-            return dataDirectoryPath;
-        }
-
-        public string getRecordIdMapPath()
-        {
-            return Path.Combine(dataDirectoryPath, RECORD_ID_MAP_FILE_NAME);
-        }
-
-        public string getDatabasePath()
-        {
-            return Path.Combine(dataDirectoryPath, DATABASE_FILE_NAME);
-        }
-        public void save(object data, string filePath)
-        {
-            serialize(data, filePath);
-        }
-
-        private void serialize(Object data, string filePath)
-        {
-            using (FileStream fileStream = File.Create(filePath))
+            using (FileStream fileStream = createFile(file))
             {
                 XmlObjectSerializer serializer = new DataContractSerializer(data.GetType());
                 serializer.WriteObject(fileStream, data);
             }
         }
-
-        public FileStream openFile(string relativeFilePath)
+        /// <summary>
+        /// Load an object from a local file
+        /// </summary>
+        /// <param name="type">type of object to load</param>
+        /// <param name="file">file to load from</param>
+        /// <returns></returns>
+        public object load(Type type, LocalFile file)
         {
-            string fullFilePath = Path.Combine(dataDirectoryPath, relativeFilePath);
-            return File.OpenRead(fullFilePath);
+            using (FileStream fileStream = openReadFile(file))
+            {
+                XmlObjectSerializer serializer = new DataContractSerializer(type);
+                return serializer.ReadObject(fileStream);
+            }
         }
-
-        private string dataDirectoryPath;
 
         private const string APP_DIRECTORY = "Finances";
         private const string DATA_DIRECTORY = "data";
         private const string IMPORT_DIRECTORY = "import";
-        private const string RECORD_ID_MAP_FILE_NAME = "next_id.ser";
-        private const string DATABASE_FILE_NAME = "database.sqlite";
+        /// <summary>
+        /// Create a file
+        /// </summary>
+        /// <param name="file">file to create</param>
+        /// <returns>file stream to write to the new file</returns>
+        private FileStream createFile(LocalFile file)
+        {
+            string filePath = getFilePath(file);
+            return File.Create(filePath);
+        }
+        /// <summary>
+        /// Open a file for reading
+        /// </summary>
+        /// <param name="file">file to open</param>
+        /// <returns>file stream to read from the file</returns>
+        private FileStream openReadFile(LocalFile file)
+        {
+            string filePath = getFilePath(file);
+            return File.OpenRead(filePath);
+        }
+        /// <summary>
+        /// Get the path to a file
+        /// </summary>
+        /// <param name="file">local file</param>
+        /// <returns>path to the file</returns>
+        private string getFilePath(LocalFile file)
+        {
+            string directoryPath = getDirectoryPath(file.LogicalDirectory);
+            return Path.Combine(directoryPath, file.FileName);
+        }
+        /// <summary>
+        /// Get the path to a logical directory
+        /// </summary>
+        /// <param name="logicalDirectory">logical directory</param>
+        /// <returns>path to the logical directory</returns>
+        private string getDirectoryPath(LogicalDirectory logicalDirectory)
+        {
+            string appDirectoryPath = getAppDirectoryPath();
+            string directoryRelativePath;
+            switch (logicalDirectory)
+            {
+                case LogicalDirectory.Import:
+                    directoryRelativePath = IMPORT_DIRECTORY;
+                    break;
+                case LogicalDirectory.Data:
+                default:
+                    directoryRelativePath = DATA_DIRECTORY;
+                    break;
+            }
 
-        private void setDataDirectory()
+            return Path.Combine(appDirectoryPath, directoryRelativePath);
+        }
+        /// <summary>
+        /// Get the path to the application root directory
+        /// </summary>
+        /// <returns>path to the application root directory</returns>
+        private string getAppDirectoryPath()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            dataDirectoryPath = Path.Combine(appDataPath, APP_DIRECTORY, DATA_DIRECTORY);
-
-            if (HttpContext.Current != null)
-            {
-                dataDirectoryPath = HttpContext.Current.Server.MapPath(dataDirectoryPath);
-            }
+            return Path.Combine(appDataPath, APP_DIRECTORY);
         }
     }
 }

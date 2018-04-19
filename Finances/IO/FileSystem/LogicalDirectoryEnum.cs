@@ -7,6 +7,6 @@ namespace Finances.IO
 {
     public enum LogicalDirectory
     {
-        Import, Home
+        Import, Data
     }
 }
