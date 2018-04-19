@@ -164,7 +164,7 @@ namespace Finances.IO
 
         private void setDatabasePath(IFileSystemManager fileSystemManager)
         {
-            databasePath = fileSystemManager.getFilePath(DATABASE_FILE_NAME, LogicalDirectory.Home);
+            //databasePath = fileSystemManager.getFilePath(DATABASE_FILE_NAME, LogicalDirectory.Home);
         }
         #endregion
 

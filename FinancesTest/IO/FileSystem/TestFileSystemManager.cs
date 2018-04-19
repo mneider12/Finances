@@ -50,6 +50,16 @@ namespace FinancesTest.IO
             throw new NotImplementedException();
         }
 
+        public void save(object data, LocalFile file)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object load(Type type, LocalFile file)
+        {
+            throw new NotImplementedException();
+        }
+
         private string dataDirectoryPath;
 
         private const string DATA_DIRECTORY = "data";

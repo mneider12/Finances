@@ -29,7 +29,7 @@ namespace Finances.Model
 
         private void setNextIdMapPath(IFileSystemManager fileSystemManager)
         {
-            nextIdMapPath = fileSystemManager.getFilePath(nextIdMapFileName, LogicalDirectory.Home);
+            //nextIdMapPath = fileSystemManager.getFilePath(nextIdMapFileName, LogicalDirectory.Home);
         }
 
         private void loadNextIdMap(IFileSystemManager fileSystemManager)

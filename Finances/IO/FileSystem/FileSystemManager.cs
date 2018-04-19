@@ -39,10 +39,22 @@ namespace Finances.IO
                 return serializer.ReadObject(fileStream);
             }
         }
+        /// <summary>
+        /// Create a file system manager
+        /// </summary>
+        /// <param name="rootDirectory">root directory to store app data in
+        ///                             this will be something like the general local Application data directory/</param>
+        public FileSystemManager(string rootDirectory)
+        {
+            this.rootDirectory = rootDirectory;
+        }
+
+        private string rootDirectory;
 
         private const string APP_DIRECTORY = "Finances";
         private const string DATA_DIRECTORY = "data";
         private const string IMPORT_DIRECTORY = "import";
+
         /// <summary>
         /// Create a file
         /// </summary>
@@ -101,8 +113,7 @@ namespace Finances.IO
         /// <returns>path to the application root directory</returns>
         private string getAppDirectoryPath()
         {
-            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            return Path.Combine(appDataPath, APP_DIRECTORY);
+            return Path.Combine(rootDirectory, APP_DIRECTORY);
         }
     }
 }

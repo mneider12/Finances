@@ -64,6 +64,7 @@
     <Compile Include="Analysis\CashAnalysisTest.cs" />
     <Compile Include="Install\TestInstall.cs" />
     <Compile Include="IO\Database\DatabaseManagerTest.cs" />
+    <Compile Include="IO\FileSystem\FileSystemMangerTest.cs" />
     <Compile Include="IO\FileSystem\TestFileSystemManager.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionTest.cs" />
     <Compile Include="Model\CashTransaction\MockCashTransactionFactory.cs" />

@@ -33,12 +33,12 @@ namespace Finances.Model
         public RecordIdMap(IFileSystemManager fileSystemManager, bool isNew)
         {
             this.fileSystemManager = fileSystemManager;
-            nextIdMapFilePath = fileSystemManager.getFilePath(nextIdMapFileName, LogicalDirectory.Home);
+            //nextIdMapFilePath = fileSystemManager.getFilePath(nextIdMapFileName, LogicalDirectory.Data);
 
             if (isNew)
             {
                 nextIdMap = new Dictionary<RecordType, int>();
-                fileSystemManager.save(nextIdMap, nextIdMapFilePath);
+                //fileSystemManager.save(nextIdMap, nextIdMapFilePath);
             }
             else
             {

@@ -21,7 +21,7 @@ namespace Admin.Main
         /// </summary>
         public static void Main()
         {
-            IFileSystemManager fileSystemManager = new FileSystemManager();
+            IFileSystemManager fileSystemManager = new FileSystemManager("");
             IRecordIdManager recordIdManager = new RecordIdManager(fileSystemManager);
             ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(recordIdManager);
             ICashTransactionLoader cashTransactionLoader = new CashTransactionLoader(cashTransactionFactory, fileSystemManager);

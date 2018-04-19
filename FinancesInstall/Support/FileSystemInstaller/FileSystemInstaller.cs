@@ -17,7 +17,7 @@ namespace FinancesInstall.Support
 
         public void run()
         {
-            Directory.CreateDirectory(fileSystemManager.getDataDirectoryPath());
+            //Directory.CreateDirectory(fileSystemManager.getDataDirectoryPath());
         }
 
         private IFileSystemManager fileSystemManager;

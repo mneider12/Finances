@@ -7,7 +7,7 @@ namespace FinancesInstall.Main
     {
         public static void Main(string[] args)
         {
-            IFileSystemManager fileSystemManager = new FileSystemManager();
+            IFileSystemManager fileSystemManager = new FileSystemManager("");
 
             IInstaller installer = new Installer(fileSystemManager);
             installer.run();
