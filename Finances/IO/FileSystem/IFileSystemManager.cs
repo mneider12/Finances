@@ -10,9 +10,7 @@ namespace Finances.IO
 {
     public interface IFileSystemManager
     {
-        string getDataFilePath(string fileName, LogicalDirectory logicalDirectory);
-
-        void serialize(object graph, string path, XmlObjectSerializer serializer);
-        FileStream openFile(string relativePath);
+        string getFilePath(string fileName, LogicalDirectory logicalDirectory);
+        void save(object data, string filePath);
     }
 }

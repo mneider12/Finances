@@ -20,6 +20,11 @@ namespace Finances.Model
             return nextId;
         }
 
+        public RecordIdMap(string filePath)
+        {
+
+        }
+
         public RecordIdMap(IFileSystemManager fileSystemManager) : this(fileSystemManager, false)
         {
 
@@ -28,13 +33,12 @@ namespace Finances.Model
         public RecordIdMap(IFileSystemManager fileSystemManager, bool isNew)
         {
             this.fileSystemManager = fileSystemManager;
-            nextIdMapPath = fileSystemManager.getRecordIdMapPath();
-            serializer = new DataContractSerializer(typeof(Dictionary<RecordType, int>));
+            nextIdMapFilePath = fileSystemManager.getFilePath(nextIdMapFileName, LogicalDirectory.Home);
 
             if (isNew)
             {
                 nextIdMap = new Dictionary<RecordType, int>();
-                fileSystemManager.serialize(nextIdMap, nextIdMapPath, serializer);
+                fileSystemManager.save(nextIdMap, nextIdMapFilePath);
             }
             else
             {
@@ -49,7 +53,7 @@ namespace Finances.Model
 
         private void load()
         {
-            using (FileStream fileStream = new FileStream(nextIdMapPath, FileMode.Open))
+            using (FileStream fileStream = new FileStream(nextIdMapFilePath, FileMode.Open))
             {
                 using (XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fileStream, new XmlDictionaryReaderQuotas()))
                 {
@@ -59,10 +63,11 @@ namespace Finances.Model
         }
 
         private Dictionary<RecordType, int> nextIdMap;
-        private string nextIdMapPath;
+        private string filePath;
         private IFileSystemManager fileSystemManager;
         private DataContractSerializer serializer;
 
+        private string nextIdMapFilePath;
         private const string nextIdMapFileName = "next_id.ser";
     }
 }

@@ -13,9 +13,7 @@ namespace Finances.Model
     {
         public int getNextId(RecordType type)
         {
-            int nextId = nextIdMap[type];
-            nextIdMap[type]++;
-            return nextId;
+            return nextIdMap.getNextId(type);
         }
 
         public RecordIdManager(IFileSystemManager fileSystemManager)
@@ -31,7 +29,7 @@ namespace Finances.Model
 
         private void setNextIdMapPath(IFileSystemManager fileSystemManager)
         {
-            nextIdMapPath = fileSystemManager.getRecordIdMapPath();
+            nextIdMapPath = fileSystemManager.getFilePath(nextIdMapFileName, LogicalDirectory.Home);
         }
 
         private void loadNextIdMap(IFileSystemManager fileSystemManager)

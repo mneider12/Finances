@@ -13,20 +13,12 @@ namespace Finances.IO
     public class FileSystemManager : IFileSystemManager
     {
         /// <summary>
-        /// Create the file system manager.
-        /// Caches the data directory
-        /// </summary>
-        public FileSystemManager()
-        {
-            setDataDirectory();
-        }
-        /// <summary>
-        /// Get the absolute file path for a logical directory
+        /// Get an absolute file path for a file within a logical directory
         /// </summary>
         /// <param name="fileName">name of the file</param>
         /// <param name="logicalDirectory">logical directory</param>
         /// <returns>absolute file path</returns>
-        public string getDataFilePath(string fileName, LogicalDirectory logicalDirectory)
+        public string getFilePath(string fileName, LogicalDirectory logicalDirectory)
         {
             switch (logicalDirectory)
             {
@@ -36,6 +28,15 @@ namespace Finances.IO
                 default:
                     return getDataDirectoryPath();
             }
+        }
+
+        /// <summary>
+        /// Create the file system manager.
+        /// Caches the data directory
+        /// </summary>
+        public FileSystemManager()
+        {
+            setDataDirectory();
         }
 
         private string getDataDirectoryPath()
@@ -52,12 +53,17 @@ namespace Finances.IO
         {
             return Path.Combine(dataDirectoryPath, DATABASE_FILE_NAME);
         }
-
-        public void serialize(object graph, string path, XmlObjectSerializer serializer)
+        public void save(object data, string filePath)
         {
-            using (FileStream fileStream = File.Create(path))
+            serialize(data, filePath);
+        }
+
+        private void serialize(Object data, string filePath)
+        {
+            using (FileStream fileStream = File.Create(filePath))
             {
-                serializer.WriteObject(fileStream, graph);
+                XmlObjectSerializer serializer = new DataContractSerializer(data.GetType());
+                serializer.WriteObject(fileStream, data);
             }
         }
 

@@ -164,12 +164,13 @@ namespace Finances.IO
 
         private void setDatabasePath(IFileSystemManager fileSystemManager)
         {
-            databasePath = fileSystemManager.getDatabasePath();
+            databasePath = fileSystemManager.getFilePath(DATABASE_FILE_NAME, LogicalDirectory.Home);
         }
         #endregion
 
         #region private members
         private string databasePath;
+        private const string DATABASE_FILE_NAME = "database.sqlite";
         #endregion
     }
 }
