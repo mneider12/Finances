@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Finances.IO;
 using System.IO;
+using System.Collections.Generic;
 
 namespace FinancesTest.IO.FileSystem
 {
@@ -9,21 +10,40 @@ namespace FinancesTest.IO.FileSystem
     public class FileSystemMangerTest
     {
         [TestMethod]
-        public void getAppDirectoryPathTest()
+        public void saveTest()
         {
-            string expectedAppDirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Finances");
-            string actualAppDirectoryPath = (string) fileSystemManagerPrivate.Invoke("getAppDirectoryPath");
+            Dictionary<string, int> wordLengthIndex = createWordLengthIndex();
+            LocalFile file = new LocalFile(LogicalDirectory.Data, "wordLengthIndex.txt");
+            fileSystemManager.save(wordLengthIndex, file);
 
-            Assert.AreEqual(expectedAppDirectoryPath, actualAppDirectoryPath);
+            Dictionary<string, int> loadedWordLengthIndex = (Dictionary<string, int>) fileSystemManager.load(typeof(Dictionary<string, int>), file);
+            Assert.AreEqual(4, loadedWordLengthIndex["test"]);
+            Assert.AreEqual(5, loadedWordLengthIndex["piano"]);
+            Assert.AreEqual(1, loadedWordLengthIndex["I"]);
+        }
+        private Dictionary<string, int> createWordLengthIndex()
+        {
+            Dictionary<string, int> wordLengthIndex = new Dictionary<string, int>();
+
+            wordLengthIndex.Add("test", 4);
+            wordLengthIndex.Add("piano", 5);
+            wordLengthIndex.Add("I", 1);
+
+            return wordLengthIndex;
         }
 
         [TestInitialize]
         public void initialize()
         {
-            IFileSystemManager fileSystemManager = new FileSystemManager(AppDomain.CurrentDomain.BaseDirectory);
-            fileSystemManagerPrivate = new PrivateObject(fileSystemManager);
+            string rootDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string appDirectory = Path.Combine(rootDirectory, "Finances");
+            string dataDirectory = Path.Combine(appDirectory, "data");
+
+            Directory.CreateDirectory(dataDirectory);
+
+            fileSystemManager = new FileSystemManager(rootDirectory);
         }
 
-        private PrivateObject fileSystemManagerPrivate;
+        IFileSystemManager fileSystemManager;
     }
 }
