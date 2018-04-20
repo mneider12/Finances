@@ -10,7 +10,7 @@ namespace Finances.IO
     /// <summary>
     /// manage interacting with the file system for storing persistent data
     /// </summary>
-    public class FileSystemManager : IFileSystemManager
+    public class FileSystemManager : FilePathBuilder, IFileSystemManager
     {
         /// <summary>
         /// Save an object to a local file
@@ -44,16 +44,7 @@ namespace Finances.IO
         /// </summary>
         /// <param name="rootDirectory">root directory to store app data in
         ///                             this will be something like the general local Application data directory/</param>
-        public FileSystemManager(string rootDirectory)
-        {
-            this.rootDirectory = rootDirectory;
-        }
-
-        private string rootDirectory;
-
-        private const string APP_DIRECTORY = "Finances";
-        private const string DATA_DIRECTORY = "data";
-        private const string IMPORT_DIRECTORY = "import";
+        public FileSystemManager(string rootDirectory) : base(rootDirectory) { }
 
         /// <summary>
         /// Create a file
@@ -74,46 +65,6 @@ namespace Finances.IO
         {
             string filePath = getFilePath(file);
             return File.OpenRead(filePath);
-        }
-        /// <summary>
-        /// Get the path to a file
-        /// </summary>
-        /// <param name="file">local file</param>
-        /// <returns>path to the file</returns>
-        private string getFilePath(LocalFile file)
-        {
-            string directoryPath = getDirectoryPath(file.LogicalDirectory);
-            return Path.Combine(directoryPath, file.FileName);
-        }
-        /// <summary>
-        /// Get the path to a logical directory
-        /// </summary>
-        /// <param name="logicalDirectory">logical directory</param>
-        /// <returns>path to the logical directory</returns>
-        private string getDirectoryPath(LogicalDirectory logicalDirectory)
-        {
-            string appDirectoryPath = getAppDirectoryPath();
-            string directoryRelativePath;
-            switch (logicalDirectory)
-            {
-                case LogicalDirectory.Import:
-                    directoryRelativePath = IMPORT_DIRECTORY;
-                    break;
-                case LogicalDirectory.Data:
-                default:
-                    directoryRelativePath = DATA_DIRECTORY;
-                    break;
-            }
-
-            return Path.Combine(appDirectoryPath, directoryRelativePath);
-        }
-        /// <summary>
-        /// Get the path to the application root directory
-        /// </summary>
-        /// <returns>path to the application root directory</returns>
-        private string getAppDirectoryPath()
-        {
-            return Path.Combine(rootDirectory, APP_DIRECTORY);
         }
     }
 }

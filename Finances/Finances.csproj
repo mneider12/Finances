@@ -94,6 +94,7 @@
     <Compile Include="IO\FileSystem\ILocalFile.cs" />
     <Compile Include="IO\FileSystem\LocalFile.cs" />
     <Compile Include="IO\FileSystem\LogicalDirectoryEnum.cs" />
+    <Compile Include="IO\FileSystem\FilePathBuilder.cs" />
     <Compile Include="Model\CashTransaction\CashTransaction.cs" />
     <Compile Include="Model\CashTransaction\CashTransactionFactory.cs" />
     <Compile Include="Model\CashTransaction\ICashTransaction.cs" />

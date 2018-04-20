@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Finances.IO
 {
-    public class DatabaseManager : IDatabaseManager
+    public class DatabaseManager : FilePathBuilder, IDatabaseManager
     {
 
         #region public methods
@@ -61,10 +61,7 @@ namespace Finances.IO
         #endregion
 
         #region public constructors
-        public DatabaseManager(IFileSystemManager fileSystemManager)
-        {
-            setDatabasePath(fileSystemManager);
-        }
+        public DatabaseManager(string rootDirectory) : base(rootDirectory) { }
         #endregion
 
         #region private methods
@@ -156,20 +153,16 @@ namespace Finances.IO
 
         private SQLiteConnection openDatabaseConnection()
         {
+            LocalFile databaseFile = new LocalFile(LogicalDirectory.Data, DATABASE_FILE_NAME);
+            string databasePath = getFilePath(databaseFile);
             SQLiteConnection databaseConnection = new SQLiteConnection("Data Source=" + databasePath);
             databaseConnection.Open();
 
             return databaseConnection;
         }
-
-        private void setDatabasePath(IFileSystemManager fileSystemManager)
-        {
-            //databasePath = fileSystemManager.getFilePath(DATABASE_FILE_NAME, LogicalDirectory.Home);
-        }
         #endregion
 
-        #region private members
-        private string databasePath;
+        #region private members;
         private const string DATABASE_FILE_NAME = "database.sqlite";
         #endregion
     }
