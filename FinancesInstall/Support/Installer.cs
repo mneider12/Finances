@@ -8,34 +8,25 @@ using System.Threading.Tasks;
 
 namespace FinancesInstall.Support
 {
-    public class Installer : IInstaller
+    public static class Installer
     {
-        public Installer(IFileSystemManager fileSystemManager)
+        public static void run(string rootDirectory)
         {
-            this.fileSystemManager = fileSystemManager;
-        }
+            IPathBuilder pathBuilder = getPathBuilder(rootDirectory);
+           
+            FileSystemInstaller.run(pathBuilder);
+            IFileSystemManager fileSystemManager = new FileSystemManager(pathBuilder);
 
-        public void run()
-        {
-            createFileSystem();
-            createDatabase();
+            string databaseFilePath = pathBuilder.getPath(SpecialFile.DATABASE);
+            IDatabaseManager databaseManager = DatabaseInstaller.run(databaseFilePath);
 
             IRecordIdMap recordIdMap = new RecordIdMap(fileSystemManager, true);
         }
 
-        private void createFileSystem()
+        private static IPathBuilder getPathBuilder(string rootDirectory)
         {
-            FileSystemInstaller filesystemInstaller = new FileSystemInstaller(fileSystemManager);
-            filesystemInstaller.run();
+            IDirectoryPathBuilder directoryPathBuilder = new DirectoryPathBuilder(rootDirectory);
+            return new PathBuilder(directoryPathBuilder);
         }
-
-        private void createDatabase()
-        {
-            DatabaseManager databaseManager = new DatabaseManager(fileSystemManager);
-            DatabaseInstaller databaseInstaller = new DatabaseInstaller(fileSystemManager, databaseManager);
-            databaseInstaller.run();
-        }
-
-        private IFileSystemManager fileSystemManager;
     }
 }

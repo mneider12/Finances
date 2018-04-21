@@ -1,5 +1,6 @@
 ﻿using Finances.IO;
 using FinancesInstall.Support;
+using System;
 
 namespace FinancesInstall.Main
 {
@@ -7,10 +8,8 @@ namespace FinancesInstall.Main
     {
         public static void Main(string[] args)
         {
-            IFileSystemManager fileSystemManager = new FileSystemManager("");
-
-            IInstaller installer = new Installer(fileSystemManager);
-            installer.run();
+            string rootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            Installer.run(rootDirectory);
         }
     }
 }

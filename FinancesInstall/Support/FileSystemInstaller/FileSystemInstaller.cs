@@ -8,18 +8,15 @@ using System.Threading.Tasks;
 
 namespace FinancesInstall.Support
 {
-    public class FileSystemInstaller : IFileSystemInstaller
+    public static class FileSystemInstaller
     {
-        public FileSystemInstaller(IFileSystemManager fileSystemManager)
+        public static void run(IDirectoryPathBuilder directoryPathBuilder)
         {
-            this.fileSystemManager = fileSystemManager;
+            foreach (LogicalDirectory logicalDirectory in Enum.GetValues(typeof(LogicalDirectory)))
+            {
+                string directoryPath = directoryPathBuilder.getPath(logicalDirectory);
+                Directory.CreateDirectory(directoryPath);
+            }
         }
-
-        public void run()
-        {
-            //Directory.CreateDirectory(fileSystemManager.getDataDirectoryPath());
-        }
-
-        private IFileSystemManager fileSystemManager;
     }
 }

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinancesInstall.Support
 {
-    public interface IFileSystemInstaller
+    public interface IPathBuilder : ISpecialFilePathBuilder, IDirectoryPathBuilder
     {
-        IFileSystemManager run();
     }
 }

@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Support\IInstaller.cs" />
     <Compile Include="Support\Installer.cs" />
     <Compile Include="Support\DatabaseInstaller\DatabaseInstaller.cs" />
     <Compile Include="Support\FileSystemInstaller\FileSystemInstaller.cs" />
@@ -57,6 +56,8 @@
     <Compile Include="Support\FileSystemInstaller\IFileSystemInstaller.cs" />
     <Compile Include="Support\DatabaseInstaller\IDatabaseInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\IPathBuilder.cs" />
+    <Compile Include="Support\PathBuilder.cs" />
     <Compile Include="Support\RecordIdManager\RecordIdMapInstaller.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,7 @@ namespace FinancesTest.IO.FileSystem
 
             Directory.CreateDirectory(dataDirectory);
 
-            fileSystemManager = new FileSystemManager(rootDirectory);
+            //fileSystemManager = new FileSystemManager(rootDirectory);
         }
 
         IFileSystemManager fileSystemManager;

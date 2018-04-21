@@ -48,7 +48,7 @@ namespace FinancesTest.IO
         {
             TestInstall.Main(null);
             fileSystemManager = new TestFileSystemManager();
-            databaseManager = new DatabaseManager(fileSystemManager);
+            databaseManager = new DatabaseManager("");
             databaseManagerPrivate = new PrivateObject(databaseManager);
         }
 

@@ -8,24 +8,19 @@ using System.Threading.Tasks;
 
 namespace FinancesInstall.Support
 {
-    public class DatabaseInstaller : IDatabaseInstaller
+    public static class DatabaseInstaller
     {
-        public DatabaseInstaller(IFileSystemManager fileSystemManager, IDatabaseManager databaseManager)
+        public static IDatabaseManager run(string databaseFilePath)
         {
-            this.fileSystemManager = fileSystemManager;
-            this.databaseManager = databaseManager;
+            SQLiteConnection.CreateFile(databaseFilePath);
+
+            IDatabaseManager databaseManager = new DatabaseManager(databaseFilePath);
+            createCashTranasactionsTable(databaseManager);
+
+            return databaseManager;
         }
 
-        public void run()
-        {
-            //SQLiteConnection.CreateFile(fileSystemManager.getDatabasePath());
-            createCashTranasactionsTable();
-        }
-
-        private IFileSystemManager fileSystemManager;
-        private IDatabaseManager databaseManager;
-
-        private void createCashTranasactionsTable()
+        private static void createCashTranasactionsTable(IDatabaseManager databaseManager)
         {
             string createSql = "CREATE TABLE `cash_transaction` ( " +
                                                                 "`id`	INTEGER NOT NULL," +

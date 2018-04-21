@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Finances.IO
 {
-    public class DatabaseManager : FilePathBuilder, IDatabaseManager
+    public class DatabaseManager : IDatabaseManager
     {
 
         #region public methods
@@ -61,8 +61,13 @@ namespace Finances.IO
         #endregion
 
         #region public constructors
-        public DatabaseManager(string rootDirectory) : base(rootDirectory) { }
+        public DatabaseManager(string databaseFilePath)
+        {
+            this.databaseFilePath = databaseFilePath;
+        }
         #endregion
+
+        private string databaseFilePath;
 
         #region private methods
         private string getInsertOneSql(string tableName, params object[] values)
@@ -153,17 +158,11 @@ namespace Finances.IO
 
         private SQLiteConnection openDatabaseConnection()
         {
-            LocalFile databaseFile = new LocalFile(LogicalDirectory.Data, DATABASE_FILE_NAME);
-            string databasePath = getFilePath(databaseFile);
-            SQLiteConnection databaseConnection = new SQLiteConnection("Data Source=" + databasePath);
+            SQLiteConnection databaseConnection = new SQLiteConnection("Data Source=" + databaseFilePath);
             databaseConnection.Open();
 
             return databaseConnection;
         }
-        #endregion
-
-        #region private members;
-        private const string DATABASE_FILE_NAME = "database.sqlite";
         #endregion
     }
 }

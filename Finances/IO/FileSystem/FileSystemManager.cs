@@ -10,7 +10,7 @@ namespace Finances.IO
     /// <summary>
     /// manage interacting with the file system for storing persistent data
     /// </summary>
-    public class FileSystemManager : FilePathBuilder, IFileSystemManager
+    public class FileSystemManager : IFileSystemManager
     {
         /// <summary>
         /// Save an object to a local file
@@ -44,7 +44,12 @@ namespace Finances.IO
         /// </summary>
         /// <param name="rootDirectory">root directory to store app data in
         ///                             this will be something like the general local Application data directory/</param>
-        public FileSystemManager(string rootDirectory) : base(rootDirectory) { }
+        public FileSystemManager(IFilePathBuilder filePathBuilder)
+        {
+            this.filePathBuilder = filePathBuilder;
+        }
+
+        private IFilePathBuilder filePathBuilder;
 
         /// <summary>
         /// Create a file
@@ -53,7 +58,7 @@ namespace Finances.IO
         /// <returns>file stream to write to the new file</returns>
         private FileStream createFile(LocalFile file)
         {
-            string filePath = getFilePath(file);
+            string filePath = filePathBuilder.getPath(file);
             return File.Create(filePath);
         }
         /// <summary>
@@ -63,7 +68,7 @@ namespace Finances.IO
         /// <returns>file stream to read from the file</returns>
         private FileStream openReadFile(LocalFile file)
         {
-            string filePath = getFilePath(file);
+            string filePath = filePathBuilder.getPath(file);
             return File.OpenRead(filePath);
         }
     }

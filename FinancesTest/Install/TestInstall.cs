@@ -10,8 +10,8 @@ namespace FinancesTest.Install
         {
             IFileSystemManager fileSystemManager = new TestFileSystemManager();
 
-            Installer installer = new Installer(fileSystemManager);
-            installer.run();
+            //Installer installer = new Installer(fileSystemManager);
+            //installer.run();
         }
     }
 }
