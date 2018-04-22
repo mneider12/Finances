@@ -45,6 +45,12 @@
   <ItemGroup>
     <Compile Include="Main\Admin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\Interfaces\IMenu.cs" />
+    <Compile Include="Support\Interfaces\IMenuOption.cs" />
+    <Compile Include="Support\Menu\MainMenu.cs" />
+    <Compile Include="Support\Menu\Menu.cs" />
+    <Compile Include="Support\Menu\MenuOption.cs" />
+    <Compile Include="Support\Menu\MethodToExecute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

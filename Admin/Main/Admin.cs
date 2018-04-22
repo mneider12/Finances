@@ -1,4 +1,5 @@
-﻿using Finances.Import;
+﻿using Admin.Support;
+using Finances.Import;
 using Finances.IO;
 using Finances.Model;
 using System;
@@ -21,7 +22,9 @@ namespace Admin.Main
         /// </summary>
         public static void Main()
         {
-            IDirectoryPathBuilder directoryPathBuilder = new DirectoryPathBuilder("");
+            IMenu mainMenu = new MainMenu();
+            mainMenu.run();
+            /*IDirectoryPathBuilder directoryPathBuilder = new DirectoryPathBuilder("");
             IFilePathBuilder filePathBuilder = new FilePathBuilder(directoryPathBuilder);
             IFileSystemManager fileSystemManager = new FileSystemManager(filePathBuilder);
             IRecordIdManager recordIdManager = new RecordIdManager(fileSystemManager);
@@ -29,7 +32,7 @@ namespace Admin.Main
             ICashTransactionLoader cashTransactionLoader = new CashTransactionLoader(cashTransactionFactory, fileSystemManager);
 
             string importPath = Path.Combine("Import", "cash_transactions_individual.txt");
-            cashTransactionLoader.load(importPath);
+            cashTransactionLoader.load(importPath);*/
         }
     }
     
