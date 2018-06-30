@@ -10,8 +10,16 @@ using System.Xml;
 
 namespace Finances.Model
 {
+    /// <summary>
+    /// Implementation of a record ID map to keep track of record types and next available ID
+    /// </summary>
     public class RecordIdMap : IRecordIdMap
     {
+        /// <summary>
+        /// Get the next available ID for a given RecordType
+        /// </summary>
+        /// <param name="type">type of record to get an ID for</param>
+        /// <returns>Next available ID</returns>
         public int getNextId(RecordType type)
         {
             int nextId = nextIdMap[type];

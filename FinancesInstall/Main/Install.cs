@@ -1,6 +1,7 @@
 ﻿using Finances.IO;
 using FinancesInstall.Support;
 using System;
+using System.Configuration;
 
 namespace FinancesInstall.Main
 {

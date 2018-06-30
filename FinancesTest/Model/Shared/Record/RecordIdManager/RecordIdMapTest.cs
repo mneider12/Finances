@@ -10,10 +10,16 @@ namespace FinancesTest.Model
     public class RecordIdMapTest
     {
         [TestMethod]
+        public void getNextIdTest()
+        {
+
+        }
+
+        [TestMethod]
         public void setGetLoadTest()
         {
             int nextId = 10;
-            RecordIdMap recordIdMap = new RecordIdMap(fileSystemManager);
+            //RecordIdMap recordIdMap = new RecordIdMap(fileSystemManager);
 
             /*recordIdMap[RecordType.CashTransaction] = nextId;
 
@@ -27,16 +33,14 @@ namespace FinancesTest.Model
         [TestInitialize]
         public void initialize()
         {
-            TestInstall.Main(null);
-            fileSystemManager = new TestFileSystemManager();
+            //TestInstall.Main(null);
+            //fileSystemManager = new TestFileSystemManager();
         }
 
         [TestCleanup]
         public void cleanup()
         {
-            fileSystemManager.cleanup();
+            //fileSystemManager.cleanup();
         }
-
-        private TestFileSystemManager fileSystemManager;
     }
 }

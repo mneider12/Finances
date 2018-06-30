@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Finances.Import;
+using Finances.Model;
+using Finances.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +11,10 @@ namespace Admin.Support
 {
     public class MainMenu : IMenu
     {
-        public MainMenu()
+        public MainMenu(IContext context)
         {
+            this.context = context;
+
             List<IMenuOption> options = new List<IMenuOption>();
 
             addOption(options, "Import", import);
@@ -22,7 +27,8 @@ namespace Admin.Support
             menu.run();
         }
 
-        IMenu menu;
+        private IMenu menu;
+        private IContext context;
 
         private void addOption(List<IMenuOption> options, string displayTitle, IMenu menuToOpen)
         {
@@ -43,7 +49,11 @@ namespace Admin.Support
 
         private void import()
         {
-            Console.WriteLine("importing");
+            ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(context.RecordIdManager);
+            ICashTransactionLoader cashTransactionLoader = new CashTransactionLoader(cashTransactionFactory, context.FileSystemManager);
+
+
+            //cashTransactionLoader.load();
         }
     }
 }

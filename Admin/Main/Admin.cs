@@ -2,6 +2,7 @@
 using Finances.Import;
 using Finances.IO;
 using Finances.Model;
+using Finances.Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,21 +19,14 @@ namespace Admin.Main
     {
         /// <summary>
         /// run the administrator console
-        /// right now it will load the file Import/cash_transactions_individual.txt into the database.
         /// </summary>
         public static void Main()
         {
-            IMenu mainMenu = new MainMenu();
-            mainMenu.run();
-            /*IDirectoryPathBuilder directoryPathBuilder = new DirectoryPathBuilder("");
-            IFilePathBuilder filePathBuilder = new FilePathBuilder(directoryPathBuilder);
-            IFileSystemManager fileSystemManager = new FileSystemManager(filePathBuilder);
-            IRecordIdManager recordIdManager = new RecordIdManager(fileSystemManager);
-            ICashTransactionFactory cashTransactionFactory = new CashTransactionFactory(recordIdManager);
-            ICashTransactionLoader cashTransactionLoader = new CashTransactionLoader(cashTransactionFactory, fileSystemManager);
+            string rootDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            IContext context = new Context(rootDirectory);
 
-            string importPath = Path.Combine("Import", "cash_transactions_individual.txt");
-            cashTransactionLoader.load(importPath);*/
+            IMenu mainMenu = new MainMenu(context);
+            mainMenu.run();
         }
     }
     

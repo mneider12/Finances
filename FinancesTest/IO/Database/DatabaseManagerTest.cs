@@ -5,6 +5,8 @@ using Finances.IO;
 using FinancesTest.Install;
 using System.Data.SQLite;
 using System.Collections.Specialized;
+using FinancesInstall.Support;
+using Finances.Shared;
 
 namespace FinancesTest.IO
 {
@@ -19,19 +21,20 @@ namespace FinancesTest.IO
             long jan2000 = new DateTime(2000, 1, 1).Ticks;
             decimal amount = 500.55m;
 
-            databaseManager.insertOne(tableName, id, jan2000, amount);
+            context.DatabaseManager.insertOne(tableName, id, jan2000, amount);
 
-            NameValueCollection values = databaseManager.selectOne(tableName, id);
+            NameValueCollection values = context.DatabaseManager.selectOne(tableName, id);
             Assert.AreEqual(id, int.Parse(values["id"]));
             Assert.AreEqual(jan2000, long.Parse(values["date"]));
             Assert.AreEqual(amount, decimal.Parse(values["amount"]));
 
-            databaseManager.deleteOne(tableName, id);
+            context.DatabaseManager.deleteOne(tableName, id);
         }
 
         [TestMethod]
         public void getInsertSqlTest()
         {
+            
             Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('1');", databaseManagerPrivate.Invoke("getInsertOneSql", "TEST_TABLE", "1"));
             Assert.AreEqual("INSERT INTO TEST_TABLE VALUES ('A','B');", databaseManagerPrivate.Invoke("getInsertOneSql", "TEST_TABLE", "A", "B"));
         }
@@ -46,22 +49,19 @@ namespace FinancesTest.IO
         [TestInitialize]
         public void initialize()
         {
-            TestInstall.Main(null);
-            fileSystemManager = new TestFileSystemManager();
-            databaseManager = new DatabaseManager("");
-            databaseManagerPrivate = new PrivateObject(databaseManager);
+            IContext context = TestInstaller.run();
+            databaseManagerPrivate = new PrivateObject(context.DatabaseManager);
         }
 
         [TestCleanup]
         public void cleanup()
         {
-            fileSystemManager.cleanup();
+            TestInstaller.deinstall();
         }
         #endregion
 
         #region private variables
-        private TestFileSystemManager fileSystemManager;
-        private IDatabaseManager databaseManager;
+        private IContext context;
         private PrivateObject databaseManagerPrivate;
         #endregion
     }
